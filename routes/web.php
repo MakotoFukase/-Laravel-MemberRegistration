@@ -18,3 +18,4 @@ Route::get('/', function () {
 
 // 参考書
 Route::get('hello', 'HelloController@index');
+Route::post('hello', 'HelloController@post');
