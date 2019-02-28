@@ -19,3 +19,9 @@ Route::get('/', function () {
 // 参考書
 Route::get('hello', 'HelloController@index');
 Route::post('hello', 'HelloController@post');
+
+
+// 会員登録サイト
+Route::get('member_list', 'MemberController@list_display');
+Route::get('member_list/registration', 'MemberController@registration');
+Route::get('member_list/registration/confirm', 'MemberController@confirm');
