@@ -13,9 +13,26 @@ class CreateMemberListTable extends Migration
      */
     public function up()
     {
-        Schema::create('member_list', function (Blueprint $table) {
+        Schema::create('dtb_customer', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->text('name');
+            $table->text('email');
+            $table->text('password');
+            $table->date('birthday');
+            $table->integer('age');
+            $table->integer('reason');
+            $table->text('comment');
+            $table->integer('notice');
+        });
+        Schema::create('mtb_notice', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text(name);
+            $table->text(email);
+        });
+        Schema::create('mtb_reason', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text('name');
+            $table->text('email');
         });
     }
 
