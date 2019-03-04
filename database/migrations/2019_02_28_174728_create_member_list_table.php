@@ -26,23 +26,21 @@ class CreateMemberListTable extends Migration
         });
         Schema::create('mtb_notice', function (Blueprint $table) {
             $table->increments('id');
-            $table->text(name);
-            $table->text(email);
+            $table->text('name');
         });
         Schema::create('mtb_reason', function (Blueprint $table) {
             $table->increments('id');
             $table->text('name');
-            $table->text('email');
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations.SS
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::dropIfExists('member_list');
-    }
+    //public function down()
+    //{
+    //    Schema::dropIfExists('member_list');
+    //}
 }
