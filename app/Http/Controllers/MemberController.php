@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class MemberController extends Controller
 {
-    public function list_display() 
+    public function list_display(Request $request) 
     {
-        $data = [
-            'members'=>'山田太郎',
-        ];
-        return view('member.member_list', $data);
+        $members = DB::select('select * from dtb_customer');
+        return view('member.member_list', $members);
     }
 
     public function registration() 
