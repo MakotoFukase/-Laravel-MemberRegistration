@@ -14,12 +14,26 @@ class MemberController extends Controller
         return view('member.member_list', ['members'=>$members]);
     }
 
-    public function registration() 
+    public function register(Request $request) 
     {
-        $data = [
-            'reg'=>'登録画面',
+        return view('member.register');
+    }
+
+    public function create(Request $request)
+    {
+        $param = [
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'password'  => $request->password,
+            'birthday'  => $request->birthday,
+            'age'       => $request->age,
+            'reason'    => $request->reason,
+            'comment'   => $request->comment,
+            'notice'    => $request->notice,
         ];
-        return view('member.registration', $data);
+        DB::insert('insert into dtb_customer (name, email, password, birthday, age, reason, comment, notice) 
+            values (:name, :email, :password, :birthday, :age, :reason, :comment, :notice)', $param);
+        return redirect ('member_list/register/confirm');
     }
 
     public function confirm() 

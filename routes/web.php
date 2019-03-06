@@ -23,5 +23,6 @@ Route::post('hello', 'HelloController@post');
 
 // 会員登録サイト
 Route::get('member_list', 'MemberController@list_display');
-Route::get('member_list/registration', 'MemberController@registration');
-Route::get('member_list/registration/confirm', 'MemberController@confirm');
+Route::get('member_list/register', 'MemberController@register');
+Route::post('member_list/register', 'MemberController@create');
+Route::get('member_list/register/confirm', 'MemberController@confirm');

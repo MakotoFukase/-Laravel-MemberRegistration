@@ -2,14 +2,16 @@
 <head>
     <title>会員登録サイト</title>
     <style>
-    body { font-size:16pt; color:#999; }
+    body { font-size:16pt; color:#555; }
     h1 { font-size:100pt; text-align:right; color:#f6f6f6;
         margin:-50px 0px -100px 0px; }
-        </style>
+    th {background-color:#999; color:fff; padding:5px 10px; }
+    td {border: solid 1px #aaa; color:#999; padding:5px 10px; }
+    </style>
 </head>
 <body>
     <h1>MemberList</h1>
-    <p>a</p>
+    <p>登録者リスト</p>
     <!--<form method="POST" action="/hello">
         {{ csrf_field() }}
         <input type="text" name="msg">
@@ -32,5 +34,6 @@
         </tr>
     @endforeach
     </table>
+    <input type="button" onclick="location.href='member_list/register'" value="新規登録">
 </body>
 </html>
