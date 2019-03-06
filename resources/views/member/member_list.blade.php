@@ -27,7 +27,7 @@
             <td>{{$member->birthday}}</td>
             <td>{{$member->age}}</td>
             <td>{{$member->reason}}</td>
-            <td>{{$member->commemt}}</td>
+            <td>{{$member->comment}}</td>
             <td>{{$member->notice}}</td>
         </tr>
     @endforeach

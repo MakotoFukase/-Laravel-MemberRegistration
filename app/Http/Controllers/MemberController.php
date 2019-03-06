@@ -11,7 +11,7 @@ class MemberController extends Controller
     public function list_display(Request $request) 
     {
         $members = DB::select('select * from dtb_customer');
-        return view('member.member_list', $members);
+        return view('member.member_list', ['members'=>$members]);
     }
 
     public function registration() 
