@@ -22,6 +22,7 @@ class MemberController extends Controller
     public function create(Request $request)
     {
         $param = [
+            'id'        => $request->input('id', ''),
             'name'      => $request->name,
             'email'     => $request->email,
             'password'  => $request->password,
@@ -31,9 +32,9 @@ class MemberController extends Controller
             'comment'   => $request->comment,
             'notice'    => $request->notice,
         ];
-        DB::insert('insert into dtb_customer (name, email, password, birthday, age, reason, comment, notice) 
-            values (:name, :email, :password, :birthday, :age, :reason, :comment, :notice)', $param);
-        return redirect ('member_list/register/confirm');
+        DB::insert('insert into dtb_customer (id, name, email, password, birthday, age, reason, comment, notice) 
+            values (:id, :name, :email, :password, :birthday, :age, :reason, :comment, :notice)', $param);
+        return redirect ('/member_list/register/confirm');
     }
 
     public function confirm() 

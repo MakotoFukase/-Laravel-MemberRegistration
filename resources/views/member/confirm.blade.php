@@ -9,11 +9,7 @@
 </head>
 <body>
         <h1>Confirm</h1>
-        <p>{{$msg}}</p>
-        <!--<form method="POST" action="/hello">
-            {{ csrf_field() }}
-            <input type="text" name="msg">
-            <input type="submit">
-        </form>-->
+        <p>登録が完了しました。</p>
+        <input type="button" onclick="location.href='/member_list'" value="戻る">
 </body>
 </html>
