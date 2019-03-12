@@ -16,8 +16,8 @@
         <table>
         <form method="post" action="/member_list/register">
             {{ csrf_field() }}
-            <!--<tr><th>ID: </th><td><input type="text" name="id">
-                </td></tr>-->
+            <tr><th>ID: </th><td><input type="text" name="id">
+                </td></tr>
             <tr><th>氏名: </th><td><input type="text" name="name">
                 </td></tr>
             <tr><th>メールアドレス: </th><td><input type="text" name="email">
