@@ -8,17 +8,20 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
-    public function list_display(Request $request) 
+    // トップ画面
+    public function list(Request $request) 
     {
         $customers = DB::select('select * from dtb_customer');
         return view('customer.list', ['customers'=>$customers]);
     }
 
+    // 登録画面
     public function input(Request $request) 
     {
         return view('customer.input');
     }
 
+    // DBへ登録
     public function create(Request $request)
     {
         $param = [
@@ -36,6 +39,7 @@ class CustomerController extends Controller
         return redirect ('/list/input/complete');
     }
 
+    // 完了画面
     public function complete() 
     {
         $data = [
@@ -43,4 +47,19 @@ class CustomerController extends Controller
         ];
         return view('customer.complete', $data);
     }
+
+    // CSV出力
+    public function export()
+    {
+        $users = array(
+            array("名前", "年齢", "血液型"),
+            array("太郎", "21", "O"),
+            array("ジョン", "23", "A"),
+            array("ニキータ", "32", "AB"),
+            array("次郎", "22", "B")
+           );
+           $csvHeader = ['名前', '年齢', '血液型'];
+           return CSV::download($users, $csvHeader, 'user_list.csv');
+    }
+
 }
