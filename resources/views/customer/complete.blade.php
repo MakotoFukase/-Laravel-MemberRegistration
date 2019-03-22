@@ -8,8 +8,8 @@
         </style>
 </head>
 <body>
-        <h1>Confirm</h1>
+        <h1>complete</h1>
         <p>登録が完了しました。</p>
-        <input type="button" onclick="location.href='/member_list'" value="戻る">
+        <input type="button" onclick="location.href='/list'" value="戻る">
 </body>
 </html>

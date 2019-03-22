@@ -10,14 +10,12 @@
         </style>
 </head>
 <body>
-        <h1>Register</h1>
+        <h1>Input</h1>
         <p>登録画面</p>
     
         <table>
-        <form method="post" action="/member_list/register">
+        <form method="post" action="/list/input">
             {{ csrf_field() }}
-            <tr><th>ID: </th><td><input type="text" name="id">
-                </td></tr>
             <tr><th>氏名: </th><td><input type="text" name="name">
                 </td></tr>
             <tr><th>メールアドレス: </th><td><input type="text" name="email">

@@ -6,23 +6,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
-class MemberController extends Controller
+class CustomerController extends Controller
 {
     public function list_display(Request $request) 
     {
-        $members = DB::select('select * from dtb_customer');
-        return view('member.member_list', ['members'=>$members]);
+        $customers = DB::select('select * from dtb_customer');
+        return view('customer.list', ['customers'=>$customers]);
     }
 
-    public function register(Request $request) 
+    public function input(Request $request) 
     {
-        return view('member.register');
+        return view('customer.input');
     }
 
     public function create(Request $request)
     {
         $param = [
-            'id'        => $request->input('id', ''),
             'name'      => $request->name,
             'email'     => $request->email,
             'password'  => $request->password,
@@ -32,16 +31,16 @@ class MemberController extends Controller
             'comment'   => $request->comment,
             'notice'    => $request->notice,
         ];
-        DB::insert('insert into dtb_customer (id, name, email, password, birthday, age, reason, comment, notice) 
-            values (:id, :name, :email, :password, :birthday, :age, :reason, :comment, :notice)', $param);
-        return redirect ('/member_list/register/confirm');
+        DB::insert('insert into dtb_customer (name, email, password, birthday, age, reason, comment, notice) 
+            values (:name, :email, :password, :birthday, :age, :reason, :comment, :notice)', $param);
+        return redirect ('/list/input/complete');
     }
 
-    public function confirm() 
+    public function complete() 
     {
         $data = [
             'msg'=>'登録確認画面',
         ];
-        return view('member.confirm', $data);
+        return view('customer.complete', $data);
     }
 }
