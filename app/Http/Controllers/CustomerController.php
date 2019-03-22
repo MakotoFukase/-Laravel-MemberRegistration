@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use App\User;
 
 
 class CustomerController extends Controller
@@ -49,17 +51,6 @@ class CustomerController extends Controller
     }
 
     // CSV出力
-    public function export()
-    {
-        $users = array(
-            array("名前", "年齢", "血液型"),
-            array("太郎", "21", "O"),
-            array("ジョン", "23", "A"),
-            array("ニキータ", "32", "AB"),
-            array("次郎", "22", "B")
-           );
-           $csvHeader = ['名前', '年齢', '血液型'];
-           return CSV::download($users, $csvHeader, 'user_list.csv');
-    }
-
+        
+        
 }
