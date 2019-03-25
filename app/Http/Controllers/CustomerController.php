@@ -13,7 +13,7 @@ class CustomerController extends Controller
     // トップ画面
     public function list(Request $request) 
     {
-        $customers = DB::select('select * from dtb_customer');
+        $customers = DB::table('dtb_customer')->get();
         return view('customer.list', ['customers'=>$customers]);
     }
 
@@ -36,8 +36,7 @@ class CustomerController extends Controller
             'comment'   => $request->comment,
             'notice'    => $request->notice,
         ];
-        DB::insert('insert into dtb_customer (name, email, password, birthday, age, reason, comment, notice) 
-            values (:name, :email, :password, :birthday, :age, :reason, :comment, :notice)', $param);
+        DB::table('dtb_customer')->insert($param);
         return redirect ('/list/input/complete');
     }
 
