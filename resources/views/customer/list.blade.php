@@ -47,5 +47,33 @@
     </table>
     <input type="button" onclick="location.href='list/input'" value="新規登録">
     <input type="button" onclick="location.href='list/export'" value="CSVダウンロード">
+
+
+
+
+<?php
+    $customers = array(
+            array("名前", "年齢", "血液型"),
+            array("太郎", "21", "O"),
+            array("ジョン", "23", "A"),
+            array("ニキータ", "32", "AB"),
+            array("次郎", "22", "B")
+        );
+
+
+ 
+        foreach ($customers as $customer) {
+            print_r($customer);
+            echo "<br>";
+        }
+
+        $stream = fopen('test.php', 'w');
+        if (is_writable('test.php')) {
+            echo 'このファイルは書き込み可能です';
+        } else {
+            echo 'このファイルは書き込みできません';
+        }
+
+        ?>
 </body>
 </html>
