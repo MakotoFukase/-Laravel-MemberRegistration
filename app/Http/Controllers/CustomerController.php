@@ -50,6 +50,7 @@ class CustomerController extends Controller
     }
 
     // CSV出力
+    // ↓いろいろ試した結果
     public function export()
     {
         return  new StreamedResponse(
@@ -80,11 +81,6 @@ class CustomerController extends Controller
     );
 }
 
-
-
-
-
-
         /*// ファイルポイントの位置を先頭に戻す
         rewind($stream);
         // 検索文字列に一致したすべての文字列を置換
@@ -100,5 +96,7 @@ class CustomerController extends Controller
         //return redirect ('/list');
         return Response::make($csv, 200, $headers);
 }    */
+
+// ↑いろいろ試した結果
         
 }
