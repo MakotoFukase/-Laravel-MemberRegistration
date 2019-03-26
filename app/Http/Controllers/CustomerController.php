@@ -67,7 +67,7 @@ class CustomerController extends Controller
             array("ニキータ", "32", "AB"),
             array("次郎", "22", "B")
         );
-        $stream = fopen('test.php', 'w+');
+        $stream = fopen('php://output', 'w+');
         foreach ($customers as $customer) {
             fputcsv($stream, $customer);
         }
