@@ -10,7 +10,7 @@
     </style>
 </head>
 <body>
-    <h1>CustomerList</h1>
+    <h1>UsersList</h1>
     <p>登録者リスト</p>
     <!--<form method="POST" action="/hello">
         {{ csrf_field() }}
@@ -31,17 +31,17 @@
         <th>メルマガ希望</th>
     </tr>
 
-    @foreach ($customers as $customer)
+    @foreach ($users as $user)
         <tr>
-            <td>{{$customer->id}}</td>
-            <td>{{$customer->name}}</td>
-            <td>{{$customer->email}}</td>
-            <td>{{$customer->password}}</td>
-            <td>{{$customer->birthday}}</td>
-            <td>{{$customer->age}}</td>
-            <td>{{$customer->reason}}</td>
-            <td>{{$customer->comment}}</td>
-            <td>{{$customer->notice}}</td>
+            <td>{{$user->id}}</td>
+            <td>{{$user->name}}</td>
+            <td>{{$user->email}}</td>
+            <td>{{$user->password}}</td>
+            <td>{{$user->birthday}}</td>
+            <td>{{$user->age}}</td>
+            <td>{{$user->reason}}</td>
+            <td>{{$user->comment}}</td>
+            <td>{{$user->notice}}</td>
         </tr>
     @endforeach
     </table>

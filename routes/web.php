@@ -22,11 +22,11 @@ Route::post('hello', 'HelloController@post');
 
 
 // 会員登録サイト
-Route::get('list', 'CustomerController@list');
-Route::get('list/input', 'CustomerController@input');
-Route::post('list/input', 'CustomerController@create');
-Route::get('list/input/complete', 'CustomerController@complete');
+Route::get('list', 'UsersController@list');
+Route::get('list/input', 'UsersController@input');
+Route::post('list/input', 'UsersController@create');
+Route::get('list/input/complete', 'UsersController@complete');
 
 // CSVデータ出力
-Route::get('list/export', 'CustomerController@export');
+Route::get('list/export', 'UsersController@export');
     
