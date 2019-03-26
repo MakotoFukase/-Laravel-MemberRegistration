@@ -17,11 +17,13 @@ class CustomerController extends Controller
         return view('customer.list', ['customers'=>$customers]);
     }
 
+
     // 登録画面
     public function input(Request $request) 
     {
         return view('customer.input');
     }
+
 
     // DBへ登録
     public function create(Request $request)
@@ -40,6 +42,7 @@ class CustomerController extends Controller
         return redirect ('/list/input/complete');
     }
 
+
     // 完了画面
     public function complete() 
     {
@@ -49,18 +52,19 @@ class CustomerController extends Controller
         return view('customer.complete', $data);
     }
 
+
     // CSV出力
-    // ↓いろいろ試した結果
     public function export(Request $request)
     {
-        $create_date = date("YmdHis");
+        // ファイル名
+        $now = date("YmdHis");
+        $create_date = "customer_$now.csv";
+
         return  new StreamedResponse(
             function () {
                 $customers = DB::table('dtb_customer')->get()->toArray();
                 //$csvHeader = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-                //array_unshift($customers, $csvHeader);
-                $create_date = date("YmdHis");
-        
+                //array_unshift($customers, $csvHeader);        
                 $stream = fopen('php://output', 'w+');
                 foreach ($customers as $customer) {
                     mb_convert_variables('SJIS-win', 'UTF-8', $customer); //文字化け対策
@@ -71,27 +75,8 @@ class CustomerController extends Controller
             200,
             [
                 'Content-Type' => 'text/csv',
-                'Content-Disposition' => "attachment; filename=$create_date.reate_date.csv",
+                'Content-Disposition' => "attachment; filename=$create_date",
             ]
         );
-    }
-
-        /*// ファイルポイントの位置を先頭に戻す
-        rewind($stream);
-        // 検索文字列に一致したすべての文字列を置換
-        // $streamの中の「PHP_EOL」を「\r\n」に置換
-        $csv = str_replace(PHP_EOL, "\r\n", stream_get_contents($stream));
-        // 文字エンコーディングを、「UTF-8」から「SJIS-win」へ変換
-        $csv = mb_convert_encoding($csv, 'SJIS-win', 'UTF-8');
-
-        $headers = array(
-            'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="customers.csv"',
-        );
-        //return redirect ('/list');
-        return Response::make($csv, 200, $headers);
-}    */
-
-// ↑いろいろ試した結果
-        
+    }       
 }
