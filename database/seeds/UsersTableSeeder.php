@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class dtb_customerSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -22,7 +22,7 @@ class dtb_customerSeeder extends Seeder
             'comment' => 'こんにちは',
             'notice' => '0',
         ];
-        DB::table('dtb_customer')->insert($param);
+        DB::table('users')->insert($param);
 
         $param = [
             'name' => 'コスモス花子',
@@ -34,7 +34,7 @@ class dtb_customerSeeder extends Seeder
             'comment' => 'こんばんは',
             'notice' => '1',
         ];
-        DB::table('dtb_customer')->insert($param);
+        DB::table('users')->insert($param);
 
     }
 }

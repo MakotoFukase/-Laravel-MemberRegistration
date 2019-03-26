@@ -64,7 +64,16 @@ class CustomerController extends Controller
             function () {
                 $customers = DB::table('dtb_customer')->get()->toArray();
                 // CSVヘッダー
-                $csvHeader = ['id', 'name', 'email', 'password', 'birthday', 'age', 'reason', 'comment', 'notice'];
+                $csvHeader = [
+                    'id', 
+                    'name', 
+                    'email', 
+                    'password', 
+                    'birthday', 
+                    'age', 
+                    'reason', 
+                    'comment', 
+                    'notice'];
                 array_unshift($customers, $csvHeader);        
                 $stream = fopen('php://output', 'w+');
                 foreach ($customers as $customer) {
@@ -79,5 +88,12 @@ class CustomerController extends Controller
                 'Content-Disposition' => "attachment; filename=$create_date",
             ]
         );
-    }     
+    }
+    
+    
+    // CSV入力
+    public function inport(Request $request)
+    {
+
+    }
 }
