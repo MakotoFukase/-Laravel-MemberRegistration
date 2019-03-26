@@ -55,21 +55,14 @@ class CustomerController extends Controller
     {
         return  new StreamedResponse(
             function () {
-        //$customers = DB::table('dtb_customer')->get()->toArray();
-        //$customers = \User::all(['id', 'name'])->toArray();
+        $customers = DB::table('dtb_customer')->get()->toArray();
         //$csvHeader = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
         //array_unshift($customers, $csvHeader);
         $create_date = date("His");
-        $customers = array(
-            array("名前", "年齢", "血液型"),
-            array("太郎", "21", "O"),
-            array("ジョン", "23", "A"),
-            array("ニキータ", "32", "AB"),
-            array("次郎", "22", "B")
-        );
+        
         $stream = fopen('php://output', 'w+');
         foreach ($customers as $customer) {
-            fputcsv($stream, $customer);
+            fputcsv($stream, (array)$customer);
         }
         fclose($stream);
     },
