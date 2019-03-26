@@ -46,31 +46,6 @@
     @endforeach
     </table>
     <input type="button" onclick="location.href='list/input'" value="新規登録">
-    <input type="button" onclick="location.href='list/export'" value="CSVダウンロード">
-
-
-
-<!-- ↓いろいろ試した結果 -->
-<?php
-    
-    $customers = DB::table('dtb_customer')->get()->toArray();
- 
-        foreach ($customers as $customer) {
-            print_r((array)$customer);
-            echo "<br>";
-        }
-
-        $stream = fopen('php://output', 'w+');
-        if (is_writable('php://output')) {
-            echo 'このファイルは書き込み可能です<br>';
-        } else {
-            echo 'このファイルは書き込みできません<br>';
-        }
-
-        $create_date = date("YmdHis");
-        echo $create_date;
-
-        ?>
-<!-- ↑いろいろ試した結果 -->        
+    <input type="button" onclick="location.href='list/export'" value="CSVダウンロード">   
 </body>
 </html>

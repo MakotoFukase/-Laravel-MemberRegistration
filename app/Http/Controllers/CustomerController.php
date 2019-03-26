@@ -51,29 +51,30 @@ class CustomerController extends Controller
 
     // CSV出力
     // ↓いろいろ試した結果
-    public function export()
+    public function export(Request $request)
     {
+        $create_date = date("YmdHis");
         return  new StreamedResponse(
             function () {
-        $customers = DB::table('dtb_customer')->get()->toArray();
-        //$csvHeader = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-        //array_unshift($customers, $csvHeader);
-        $create_date = date("YmdHis");
+                $customers = DB::table('dtb_customer')->get()->toArray();
+                //$csvHeader = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+                //array_unshift($customers, $csvHeader);
+                $create_date = date("YmdHis");
         
-        $stream = fopen('php://output', 'w+');
-        foreach ($customers as $customer) {
-            mb_convert_variables('SJIS-win', 'UTF-8', $customer); //文字化け対策
-            fputcsv($stream, (array)$customer);
-        }
-        fclose($stream);
-    },
-    200,
-    [
-        'Content-Type' => 'text/csv',
-        'Content-Disposition' => 'attachment; filename="{$create_date}reate_date.csv"',
-    ]
-    );
-}
+                $stream = fopen('php://output', 'w+');
+                foreach ($customers as $customer) {
+                    mb_convert_variables('SJIS-win', 'UTF-8', $customer); //文字化け対策
+                    fputcsv($stream, (array)$customer);
+                }
+                fclose($stream);
+                },
+            200,
+            [
+                'Content-Type' => 'text/csv',
+                'Content-Disposition' => "attachment; filename=$create_date.reate_date.csv",
+            ]
+        );
+    }
 
         /*// ファイルポイントの位置を先頭に戻す
         rewind($stream);
