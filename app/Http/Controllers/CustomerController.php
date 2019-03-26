@@ -58,10 +58,11 @@ class CustomerController extends Controller
         $customers = DB::table('dtb_customer')->get()->toArray();
         //$csvHeader = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
         //array_unshift($customers, $csvHeader);
-        $create_date = date("His");
+        $create_date = date("YmdHis");
         
         $stream = fopen('php://output', 'w+');
         foreach ($customers as $customer) {
+            mb_convert_variables('SJIS-win', 'UTF-8', $customer); //文字化け対策
             fputcsv($stream, (array)$customer);
         }
         fclose($stream);
@@ -69,7 +70,7 @@ class CustomerController extends Controller
     200,
     [
         'Content-Type' => 'text/csv',
-        'Content-Disposition' => 'attachment; filename=customer.csv',
+        'Content-Disposition' => 'attachment; filename="{$create_date}reate_date.csv"',
     ]
     );
 }

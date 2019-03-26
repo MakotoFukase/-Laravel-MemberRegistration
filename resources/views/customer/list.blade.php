@@ -52,14 +52,7 @@
 
 <!-- ↓いろいろ試した結果 -->
 <?php
-    /*$customers = array(
-            array("名前", "年齢", "血液型"),
-            array("太郎", "21", "O"),
-            array("ジョン", "23", "A"),
-            array("ニキータ", "32", "AB"),
-            array("次郎", "22", "B")
-        );*/
-
+    
     $customers = DB::table('dtb_customer')->get()->toArray();
  
         foreach ($customers as $customer) {
@@ -69,10 +62,13 @@
 
         $stream = fopen('php://output', 'w+');
         if (is_writable('php://output')) {
-            echo 'このファイルは書き込み可能です';
+            echo 'このファイルは書き込み可能です<br>';
         } else {
-            echo 'このファイルは書き込みできません';
+            echo 'このファイルは書き込みできません<br>';
         }
+
+        $create_date = date("YmdHis");
+        echo $create_date;
 
         ?>
 <!-- ↑いろいろ試した結果 -->        
