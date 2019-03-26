@@ -63,8 +63,9 @@ class CustomerController extends Controller
         return  new StreamedResponse(
             function () {
                 $customers = DB::table('dtb_customer')->get()->toArray();
-                //$csvHeader = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-                //array_unshift($customers, $csvHeader);        
+                // CSVヘッダー
+                $csvHeader = ['id', 'name', 'email', 'password', 'birthday', 'age', 'reason', 'comment', 'notice'];
+                array_unshift($customers, $csvHeader);        
                 $stream = fopen('php://output', 'w+');
                 foreach ($customers as $customer) {
                     mb_convert_variables('SJIS-win', 'UTF-8', $customer); //文字化け対策
@@ -78,5 +79,5 @@ class CustomerController extends Controller
                 'Content-Disposition' => "attachment; filename=$create_date",
             ]
         );
-    }       
+    }     
 }

@@ -47,5 +47,13 @@
     </table>
     <input type="button" onclick="location.href='list/input'" value="新規登録">
     <input type="button" onclick="location.href='list/export'" value="CSVダウンロード">   
+
+<?php
+
+?>
+
+
+
+
 </body>
 </html>
