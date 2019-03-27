@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\User;
+use App\Exports\UsersExport;
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Response;
 
 
 class UsersController extends Controller
@@ -55,43 +57,47 @@ class UsersController extends Controller
     }
 
 
-    // CSV出力
-    public function export(Request $request)
-    {
-        // ファイル名
-        $now = date("YmdHis");
-        $create_date = "users_$now.csv";
-
-        return  new StreamedResponse(
-            function () {
-                $users = DB::table('users')->get()->toArray();
-                // CSVヘッダー
-                $csvHeader = [
-                    'id', 
-                    'name', 
-                    'email', 
-                    'password', 
-                    'birthday', 
-                    'age', 
-                    'reason', 
-                    'comment', 
-                    'notice'];
-                array_unshift($users, $csvHeader);        
-                $stream = fopen('php://output', 'w+');
-                foreach ($users as $user) {
-                    mb_convert_variables('SJIS-win', 'UTF-8', $user); //文字化け対策
-                    fputcsv($stream, (array)$user);
-                }
-                fclose($stream);
-                },
-            200,
-            [
-                'Content-Type' => 'text/csv',
-                'Content-Disposition' => "attachment; filename=$create_date",
-            ]
-        );
-    }
+   // CSV出力
+   public function export()
+   {
+       $now = date("YmdHis");
+       $users = DB::table('users')->get()->toArray();
+       $csvHeader = [
+           'id', 
+           'name', 
+           'email', 
+           'password', 
+           'birthday', 
+           'age', 
+           'reason', 
+           'comment', 
+           'notice',
+           'created_at',
+           'updated_at'
+       ];
+       array_unshift($users, $csvHeader);        
+       $stream = fopen('php://temp', 'r+b');
+       foreach ($users as $user) {
+           fputcsv($stream, (array)$user);
+       }
+       rewind($stream);
+       $csv = str_replace(PHP_EOL, "\r\n", stream_get_contents($stream));
+       $csv = mb_convert_encoding($csv, 'SJIS-win', 'UTF-8');
+       $headers = array(
+           'Content-Type' => 'text/csv',
+           'Content-Disposition' => "attachment; filename=users_$now.csv",
+       );
+       return Response::make($csv, 200, $headers);
+   } 
     
+    // CSV出力_Excelクラス使用
+    // 「.csv」だと文字化け不可避
+    /*public function export()
+    {
+        $now = date("YmdHis");
+        return Excel::download(new UsersExport, "users_$now.xlsx");
+    }*/
+
     
     // CSV入力
     public function import(Request $request)
@@ -99,7 +105,7 @@ class UsersController extends Controller
         $file = $request->file('file');
         //$file = file_get_contents($file);
         //$file = mb_convert_encoding($file, 'UTF-8', 'SJIS');
-        Excel::import(new UsersImport, $file, 'local', \Maatwebsite\Excel\Excel::CSV);
+        Excel::import(new UsersImport, $file);//, 'local', \Maatwebsite\Excel\Excel::XLSX);
         return redirect ('/list');
 
         //return view('users.test', ['file'=>$file]);
