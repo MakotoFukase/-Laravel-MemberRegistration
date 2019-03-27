@@ -7,6 +7,8 @@ use Maatwebsite\Excel\Concerns\ToModel;
 
 class UsersImport implements ToModel
 {
+    //protected $guarded = ['id'];
+
     /**
     * @param array $row
     *

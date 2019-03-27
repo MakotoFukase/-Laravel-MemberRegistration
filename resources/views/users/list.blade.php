@@ -56,6 +56,12 @@
         </div>
     </form>
 
+    <form method="post" action="list" enctype="multipart/form-data">
+        {{ csrf_field() }}
+        <input type="file" name="file"><br>
+        <input type="submit" value="send">
+    </form>
+
 <?php
 
 ?>
