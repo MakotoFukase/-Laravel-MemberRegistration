@@ -45,29 +45,13 @@
         </tr>
     @endforeach
     </table>
-    <input type="button" onclick="location.href='list/input'" value="新規登録"><br>
-    <input type="button" onclick="location.href='list/export'" value="CSVダウンロード"><br>
-
-    <form role="form" method="post" action="list/import" enctype="multipart/form-data">
-        {{ csrf_field() }}
-        <input type="file" name="file" id="file">
-        <div class="form-group">
-            <button type="submit" class="btn btn-default btn-success">保存</button>
-        </div>
-    </form>
+    <input type="button" onclick="location.href='list/input'" value="新規登録"><br><br>
+    <input type="button" onclick="location.href='list/export'" value="CSVダウンロード"><br><br>
 
     <form method="post" action="list" enctype="multipart/form-data">
         {{ csrf_field() }}
-        <input type="file" name="file"><br>
+        <input type="file" name="file">
         <input type="submit" value="send">
     </form>
-
-<?php
-
-?>
-
-
-
-
 </body>
 </html>

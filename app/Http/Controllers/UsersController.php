@@ -97,8 +97,11 @@ class UsersController extends Controller
     public function import(Request $request)
     {
         $file = $request->file('file');
-        Excel::import(new UsersImport, $file);
-        //(new UsersImport)->import($request->excel_file);
+        //$file = file_get_contents($file);
+        //$file = mb_convert_encoding($file, 'UTF-8', 'SJIS');
+        Excel::import(new UsersImport, $file, 'local', \Maatwebsite\Excel\Excel::CSV);
         return redirect ('/list');
+
+        //return view('users.test', ['file'=>$file]);
     }
 }
