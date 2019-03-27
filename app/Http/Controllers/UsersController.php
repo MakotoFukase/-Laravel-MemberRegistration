@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\User;
+use Maatwebsite\Excel\Facades\Excel;
+use Imports\UsersImport;
 
 
 class UsersController extends Controller
@@ -92,8 +94,9 @@ class UsersController extends Controller
     
     
     // CSV入力
-    public function inport(Request $request)
+    public function store(Request $request)
     {
-
+        $file = $request->file('file');
+        Excel::import(new UsersImport, $file);
     }
 }

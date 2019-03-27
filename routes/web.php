@@ -27,6 +27,7 @@ Route::get('list/input', 'UsersController@input');
 Route::post('list/input', 'UsersController@create');
 Route::get('list/input/complete', 'UsersController@complete');
 
-// CSVデータ出力
+// CSV出力
 Route::get('list/export', 'UsersController@export');
-    
+// CSV入力
+Route::post('/list/import', 'UsersController@store');   
