@@ -13,7 +13,7 @@ class UsersController extends Controller
     // トップ画面
     public function list(Request $request) 
     {
-        $users = DB::table('users')->get();
+        $users = User::all();
         return view('users.list', ['users'=>$users]);
     }
 
