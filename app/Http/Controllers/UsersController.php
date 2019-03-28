@@ -100,7 +100,8 @@ class UsersController extends Controller
 
     
     // CSV入力
-    public function import(Request $request)
+    // 文字化け中
+    /*public function import(Request $request)
     {
         $file = $request->file('file');
         //$file = file_get_contents($file);
@@ -109,5 +110,23 @@ class UsersController extends Controller
         return redirect ('/list');
 
         //return view('users.test', ['file'=>$file]);
+    }*/
+
+    // 試し中
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        //$file_name = $request->file('file')->getClientOriginalName();
+        $handle = fopen($file, "r+");
+        $data = file_get_contents($file);
+        $data = mb_convert_encoding($data, 'UTF-8', 'SJIS');
+        //$temp = tmpfile();
+        //fwrite($temp, $file);
+        rewind($handle);
+        fclose($handle);
+        Excel::import(new UsersImport, $file);
+        return redirect ('/list');
+
+        //return view('users.test', ['data'=>$data]);
     }
 }

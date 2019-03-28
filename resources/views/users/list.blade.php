@@ -12,11 +12,6 @@
 <body>
     <h1>UsersList</h1>
     <p>登録者リスト</p>
-    <!--<form method="POST" action="/hello">
-        {{ csrf_field() }}
-        <input type="text" name="msg">
-        <input type="submit">
-    </form>-->
 
     <table>
     <tr>

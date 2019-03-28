@@ -6,8 +6,9 @@
 </head>
 <body>
 <?php
-var_dump($file);
-print_r($file);
+//var_dump($file);
+//print_r($file);
+//echo $data;
 ?>
 </body>
 </html>
