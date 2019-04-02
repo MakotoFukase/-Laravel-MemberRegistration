@@ -4,8 +4,10 @@ namespace App\Imports;
 
 use App\User;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class UsersImport implements ToModel
+class UsersImport implements ToModel, WithHeadingRow
 {
     //protected $guarded = ['id'];
 
@@ -17,14 +19,14 @@ class UsersImport implements ToModel
     public function model(array $row)
     {
         return new User([
-            'name'      => $row[0],
-            'email'     => $row[1],
-            'password'  => $row[2],
-            'birthday'  => $row[3],
-            'age'       => $row[4],
-            'reason'    => $row[5],
-            'comment'   => $row[6],
-            'notice'    => $row[7],
+            'name'      => $row['name'],
+            'email'     => $row['email'],
+            'password'  => $row['password'],
+            'birthday'  => $row['birthday'],
+            'age'       => $row['age'],
+            'reason'    => $row['reason'],
+            'comment'   => $row['comment'],
+            'notice'    => $row['notice'],
         ]);
     }
 }

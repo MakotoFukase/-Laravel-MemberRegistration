@@ -10,6 +10,7 @@ use App\Exports\UsersExport;
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Response;
+
 //use Rap2hpoutre\FastExcel\FastExcel;
 
 
@@ -104,9 +105,7 @@ class UsersController extends Controller
     public function import(Request $request)
     {
         $file = $request->file('file');
-        //$file = file_get_contents($file);
-        //$file = mb_convert_encoding($file, 'UTF-8', 'SJIS');
-        Excel::import(new UsersImport, $file);//, 'local', \Maatwebsite\Excel\Excel::XLSX);
+        Excel::import(new UsersImport, $file);
         return redirect ('/list');
 
         //return view('users.test', ['file'=>$file]);
