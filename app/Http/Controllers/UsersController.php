@@ -10,7 +10,7 @@ use App\Exports\UsersExport;
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Response;
-use Rap2hpoutre\FastExcel\FastExcel;
+//use Rap2hpoutre\FastExcel\FastExcel;
 
 
 class UsersController extends Controller
@@ -59,7 +59,7 @@ class UsersController extends Controller
 
 
    // CSV出力
-   /*public function export()
+   public function export()
    {
        $now = date("YmdHis");
        $users = DB::table('users')->get()->toArray();
@@ -86,7 +86,7 @@ class UsersController extends Controller
        $csv = mb_convert_encoding($csv, 'SJIS-win', 'UTF-8');
        $headers = array(
            'Content-Type' => 'text/csv',
-           'Content-Disposition' => "attachment; filename=users_$now.csv",
+           'Content-Disposition' => "attachment; filename=users_$now.csv"
        );
        return Response::make($csv, 200, $headers);
     }
@@ -101,8 +101,7 @@ class UsersController extends Controller
 
     
     // CSV入力
-    // 文字化け中
-    /*public function import(Request $request)
+    public function import(Request $request)
     {
         $file = $request->file('file');
         //$file = file_get_contents($file);
@@ -111,37 +110,5 @@ class UsersController extends Controller
         return redirect ('/list');
 
         //return view('users.test', ['file'=>$file]);
-    }*/
-
-    // 試し中
-    /*public function import(Request $request)
-    {
-        $file = $request->file('file');
-        $handle = fopen($file, "r+");
-        $data = file_get_contents($file);
-        mb_convert_encoding($data, 'UTF-8', 'SJIS-win');
-        //$temp = tmpfile();
-        //fwrite($temp, $file);
-        rewind($handle);
-        fclose($handle);
-        Excel::import(new UsersImport, $file);
-        return redirect ('/list');
-
-        //return view('users.test', ['file'=>$file, 'handle'=>$handle, 'data'=>$data,]);
-    }*/
-
-    // FastExcel使用
-    /*public function import(Request $request)
-    {
-        $file = $request -> file('file');
-        $users = (new FastExcel)->configureCsv(';', '#', '\n', 'gbk')
-            ->import($file, function ($line)
-        {                 
-            return User::create([
-                'name' => $line['name'],
-                'email' => $line['email']
-            ]);
-        });
-
-    }*/
+    }
 }
