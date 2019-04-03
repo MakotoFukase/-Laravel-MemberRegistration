@@ -102,12 +102,20 @@ class UsersController extends Controller
 
     
     // CSV入力
-    public function import(Request $request)
+    
+
+
+
+
+
+
+    // アップデートできないので却下
+    /*public function import(Request $request)
     {
         $file = $request->file('file');
         Excel::import(new UsersImport, $file);
         return redirect ('/list');
 
         //return view('users.test', ['file'=>$file]);
-    }
+    }*/
 }
