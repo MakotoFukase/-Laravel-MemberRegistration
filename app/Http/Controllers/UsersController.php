@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\User;
 use App\Exports\UsersExport;
@@ -16,6 +17,12 @@ use Response;
 
 class UsersController extends Controller
 {
+    protected $user = null;
+
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
     // トップ画面
     public function list(Request $request) 
     {
@@ -102,12 +109,27 @@ class UsersController extends Controller
 
     
     // CSV入力
-    
 
 
 
 
 
+
+
+
+    // 読み込めないエラー発生
+    /*public function import(Request $request)
+    {
+        $path = $request->file('file')->store('import');
+        $reader = Excel::load($path);
+
+        $rows = $reader->toArray();
+
+        foreach ($rows as $row){
+            $recode = $this->user->updateOrCreate(['id' => $row['id']]);
+        }
+        return redirect ('/list');
+    }*/
 
     // アップデートできないので却下
     /*public function import(Request $request)
