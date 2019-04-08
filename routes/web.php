@@ -33,5 +33,5 @@ Route::get('list/export', 'CsvController@export');
 Route::post('list/import', 'CsvController@import');   
 
 
-
-//Route::get('list/test', 'UsersController@test');
+// テスト
+Route::get('list/test', 'CsvController@test');

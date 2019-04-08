@@ -70,16 +70,17 @@ class CsvController extends Controller
         setlocale(LC_ALL, 'ja_JP.UTF-8');
 
         // storeメゾット：アップロードファイルの保存
-        $upload_file = $request->file('file');//->store('import');
-        $file_path = $upload_file->getRealPath();
+        $now = date("YmdHis");
+        $file_name = $request->file('file')->storeAs('import', "$now.csv");
+        $file_path = "/home/vagrant/code/Laravel/storage/app/$file_name";
 
         // 読み込んだデータをUTF-8に変換して保存
         file_put_contents($file_path, mb_convert_encoding(file_get_contents($file_path), 'UTF-8'));
         $file = new SplFileObject($file_path);
         $file->setFlags(SplFileObject::READ_CSV);
 
-        // $registerde_id でCB内のidを取得
-        $registerde_id = DB::table('users')->get('id');
+        // $registerde_id でDB内のidを取得
+        $registerde_id = DB::table('users')->get(['id']);
 
         foreach ($file as $row){
             User::updateOrCreate(
@@ -96,6 +97,7 @@ class CsvController extends Controller
                 ]
             );
         }
+        //return view('users.test', ['file'=>$file]);
         return redirect ('/list');
     }
 

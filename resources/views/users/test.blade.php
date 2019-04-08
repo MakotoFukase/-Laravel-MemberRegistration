@@ -7,10 +7,10 @@
 <body>
 <?php
 var_dump($file);
-var_dump($handle);
-var_dump($data);
-//print_r($file);
-//echo $data;
+//var_dump($handle);
+//var_dump($data);
+print_r($file);
+//echo $file;
 ?>
 </body>
 </html>
