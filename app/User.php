@@ -33,5 +33,15 @@ class User extends Authenticatable
 
 class User extends Model
 {
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'id',
+        'name',
+        'email',
+        'password',
+        'birthday',
+        'age',
+        'reason',
+        'comment',
+        'notice'
+    ];
 }

@@ -30,7 +30,7 @@ Route::get('list/input/complete', 'UsersController@complete');
 // CSV出力
 Route::get('list/export', 'CsvController@export');
 // CSV入力
-Route::post('list', 'CsvController@import');   
+Route::post('list/import', 'CsvController@import');   
 
 
 

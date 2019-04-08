@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+use App\User;
 use Illuminate\Http\Request;
 use App\Exports\UsersExport;
 use App\Imports\UsersImport;
@@ -12,6 +14,13 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class CsvController extends Controller
 {
+    protected $user = null;
+    // construct：初期化
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
     // CSV出力
    public function export()
    {
@@ -57,16 +66,35 @@ class CsvController extends Controller
     // CSV入力
     public function import(Request $request)
     {
-        $upload_file = $request->file('file')->store('import');
+        // ロケールを設定(日本語に設定)
+        setlocale(LC_ALL, 'ja_JP.UTF-8');
+
+        // storeメゾット：アップロードファイルの保存
+        $upload_file = $request->file('file');//->store('import');
         $file_path = $upload_file->getRealPath();
 
+        // 読み込んだデータをUTF-8に変換して保存
+        file_put_contents($file_path, mb_convert_encoding(file_get_contents($file_path), 'UTF-8'));
         $file = new SplFileObject($file_path);
         $file->setFlags(SplFileObject::READ_CSV);
 
-        $rows = $reader->toArray();
+        // $registerde_id でCB内のidを取得
+        $registerde_id = DB::table('users')->get('id');
 
-        foreach ($rows as $row){
-            $recode = $this->user->updateOrCreate(['id' => $row['id']]);
+        foreach ($file as $row){
+            User::updateOrCreate(
+                ['id' => $registerde_id], // $registerde_id でDB内のidを取得する
+                [
+                    'name'      => $row['name'],
+                    'email'     => $row['email'],
+                    'password'  => $row['password'],
+                    'birthday'  => $row['birthday'],
+                    'age'       => $row['age'],
+                    'reason'    => $row['reason'],
+                    'comment'   => $row['comment'],
+                    'notice'    => $row['notice'],
+                ]
+            );
         }
         return redirect ('/list');
     }

@@ -39,11 +39,10 @@
             <td>{{$user->notice}}</td>
         </tr>
     @endforeach
-    </table>
-    <input type="button" onclick="location.href='list/input'" value="新規登録"><br><br>
-    <input type="button" onclick="location.href='list/export'" value="CSVダウンロード"><br><br>
-
-    <form method="post" action="list" enctype="multipart/form-data">
+    </table><br>
+    <input type="button" onclick="location.href='list/input'" value="新規登録">
+    <input type="button" onclick="location.href='list/export'" value="CSVダウンロード">
+    <form method="post" action="list/import" enctype="multipart/form-data">
         {{ csrf_field() }}
         <input type="file" name="file">
         <input type="submit" value="send">

@@ -9,13 +9,6 @@ use App\User;
 
 class UsersController extends Controller
 {
-    protected $user = null;
-
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
-
     // トップ画面
     public function list(Request $request) 
     {
