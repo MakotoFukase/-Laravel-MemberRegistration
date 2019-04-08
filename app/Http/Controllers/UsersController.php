@@ -5,16 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\User;
-use App\Exports\UsersExport;
-use App\Imports\UsersImport;
-use Maatwebsite\Excel\Facades\Excel;
-use Response;
-use SplFileObject;
-
-//use Rap2hpoutre\FastExcel\FastExcel;
-
 
 class UsersController extends Controller
 {
