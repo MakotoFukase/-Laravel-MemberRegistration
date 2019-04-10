@@ -6,10 +6,10 @@
 </head>
 <body>
 <?php
-var_dump($registerde_id);
+var_dump($row);
 //var_dump($handle);
 //var_dump($data);
-print_r($registerde_id);
+print_r($row);
 //echo $registerde_id;
 ?>
 </body>

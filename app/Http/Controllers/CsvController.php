@@ -72,33 +72,60 @@ class CsvController extends Controller
         // storeメゾット：アップロードファイルの保存
         $now = date("YmdHis");
         $file_name = $request->file('file')->storeAs('import', "$now.csv");
+        // 【課題】フルパス取得するやつに変更
         $file_path = "/home/vagrant/code/Laravel/storage/app/$file_name";
 
         // 読み込んだデータをUTF-8に変換して保存
         file_put_contents($file_path, mb_convert_encoding(file_get_contents($file_path), 'UTF-8'));
-        $file = new SplFileObject($file_path);
+        $file = new SplFileObject($file_path, "r+b");
         $file->setFlags(SplFileObject::READ_CSV);
 
         // $registerde_id でDB内のidを取得
         $registerde_id = DB::table('users')->get(['id'])->toArray();
         //$registerde_id = (array) $registerde_id;
 
-        foreach ($file as $row){
+        /*foreach ($file as $row){
             User::updateOrCreate(
                 ['id' => 1], // $registerde_id でDB内のidを取得する
                 [
-                    'name'      => $row['name'],
-                    'email'     => $row['email'],
-                    'password'  => $row['password'],
-                    'birthday'  => $row['birthday'],
-                    'age'       => $row['age'],
-                    'reason'    => $row['reason'],
-                    'comment'   => $row['comment'],
-                    'notice'    => $row['notice'],
+                    'name'      => $row['1'],
+                    'email'     => $row['2'],
+                    'password'  => $row['3'],
+                    'birthday'  => $row['4'],
+                    'age'       => $row['5'],
+                    'reason'    => $row['6'],
+                    'comment'   => $row['7'],
+                    'notice'    => $row['8'],
                 ]
             );
+        }*/
+
+        //取得したオブジェクトを読み込み
+        // サイトのやつのコピペ
+        foreach ($file as $row)
+        {
+            //1件ずつインポート
+            User::insert(array(
+                'name' => $row[1], 
+                'email' => $row[2], 
+                'password' => $row[3], 
+                //'birthday' => $row[4],
+                //'age'       => $row[5],
+                //'reason'    => $row[6],
+                'comment'   => $row[7],
+                //'notice'    => $row[8],
+            ));
+            
+            //$row_count++;
         }
-        //return view('users.test', ['registerde_id'=>$registerde_id]);
+
+        /*foreach ($file as $row) {
+            // 行番号を取得し、最初の行のみ除外
+            if ($file->key() > 0){
+                var_dump($row);
+            }
+        }*/
+        //return view('users.test', ['row'=>$row]);
         return redirect ('/list');
     }
 
