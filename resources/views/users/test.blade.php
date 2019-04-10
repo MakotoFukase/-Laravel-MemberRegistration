@@ -6,11 +6,11 @@
 </head>
 <body>
 <?php
-var_dump($file);
+var_dump($registerde_id);
 //var_dump($handle);
 //var_dump($data);
-print_r($file);
-//echo $file;
+print_r($registerde_id);
+//echo $registerde_id;
 ?>
 </body>
 </html>

@@ -80,11 +80,12 @@ class CsvController extends Controller
         $file->setFlags(SplFileObject::READ_CSV);
 
         // $registerde_id でDB内のidを取得
-        $registerde_id = DB::table('users')->get(['id']);
+        $registerde_id = DB::table('users')->get(['id'])->toArray();
+        //$registerde_id = (array) $registerde_id;
 
         foreach ($file as $row){
             User::updateOrCreate(
-                ['id' => $registerde_id], // $registerde_id でDB内のidを取得する
+                ['id' => 1], // $registerde_id でDB内のidを取得する
                 [
                     'name'      => $row['name'],
                     'email'     => $row['email'],
@@ -97,7 +98,7 @@ class CsvController extends Controller
                 ]
             );
         }
-        //return view('users.test', ['file'=>$file]);
+        //return view('users.test', ['registerde_id'=>$registerde_id]);
         return redirect ('/list');
     }
 
