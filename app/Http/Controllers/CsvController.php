@@ -81,7 +81,7 @@ class CsvController extends Controller
         $file->setFlags(SplFileObject::READ_CSV);
 
         // $registerde_id でDB内のidを取得
-        $registerde_id = DB::table('users')->get(['id'])->toArray();
+        $registerde_id = DB::table('users')->get(['id']);//->toArray();
         //$registerde_id = (array) $registerde_id;
 
         /*foreach ($file as $row){
@@ -91,30 +91,31 @@ class CsvController extends Controller
                     'name'      => $row['1'],
                     'email'     => $row['2'],
                     'password'  => $row['3'],
-                    'birthday'  => $row['4'],
-                    'age'       => $row['5'],
-                    'reason'    => $row['6'],
+                    //'birthday'  => $row['4'],
+                    //'age'       => $row['5'],
+                    //'reason'    => $row['6'],
                     'comment'   => $row['7'],
-                    'notice'    => $row['8'],
+                    //'notice'    => $row['8'],
                 ]
             );
         }*/
 
         //取得したオブジェクトを読み込み
-        // サイトのやつのコピペ
         foreach ($file as $row)
         {
-            //1件ずつインポート
-            User::insert(array(
-                'name' => $row[1], 
-                'email' => $row[2], 
-                'password' => $row[3], 
-                //'birthday' => $row[4],
-                //'age'       => $row[5],
-                //'reason'    => $row[6],
-                'comment'   => $row[7],
-                //'notice'    => $row[8],
-            ));
+            if ($file->key() > 0){
+                //1件ずつインポート
+                User::insert(array(
+                    'name' => $row[1], 
+                    'email' => $row[2], 
+                    'password' => $row[3], 
+                    'birthday' => $row[4],
+                    'age'       => $row[5],
+                    'reason'    => $row[6],
+                    'comment'   => $row[7],
+                    'notice'    => $row[8],
+                ));
+            }
             
             //$row_count++;
         }
