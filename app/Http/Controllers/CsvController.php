@@ -72,7 +72,7 @@ class CsvController extends Controller
         // storeメゾット：アップロードファイルの保存
         $now = date("YmdHis");
         $file_name = $request->file('file')->storeAs('import', "$now.csv");
-        // 【課題】フルパス取得するやつに変更
+        // TODO:フルパス取得するやつに変更
         $file_path = "/home/vagrant/code/Laravel/storage/app/$file_name";
 
         // 読み込んだデータをUTF-8に変換して保存
@@ -88,42 +88,59 @@ class CsvController extends Controller
             User::updateOrCreate(
                 ['id' => 1], // $registerde_id でDB内のidを取得する
                 [
-                    'name'      => $row['1'],
-                    'email'     => $row['2'],
-                    'password'  => $row['3'],
-                    //'birthday'  => $row['4'],
-                    //'age'       => $row['5'],
-                    //'reason'    => $row['6'],
-                    'comment'   => $row['7'],
-                    //'notice'    => $row['8'],
+                    'name' => $row[1], 
+                    'email' => $row[2], 
+                    'password' => $row[3], 
+                    'birthday' => $row[4],
+                    'age'       => (int)$row[5],
+                    'reason'    => (int)$row[6],
+                    'comment'   => $row[7],
+                    'notice'    => (int)$row[8],
                 ]
             );
         }*/
 
+
         //取得したオブジェクトを読み込み
+        $row_count = 1;
         foreach ($file as $row)
         {
+            // 最終行の処理(最終行が空っぽの場合の対策)
+            if ($row === [null]) continue; 
+
             if ($file->key() > 0){
+
+                // birthdayをdate型へ変換
+                if ($row[4] == null) {
+                    $date = null;
+                }
+                else {
+                    $date = date('Y-m-d', strtotime($row[4]));
+                }
+                    
+
                 //1件ずつインポート
                 User::insert(array(
                     'name' => $row[1], 
                     'email' => $row[2], 
                     'password' => $row[3], 
-                    'birthday' => $row[4],
-                    'age'       => $row[5],
-                    'reason'    => $row[6],
+                    'birthday' => $date,
+                    'age'       => (int)$row[5],
+                    'reason'    => (int)$row[6],
                     'comment'   => $row[7],
-                    'notice'    => $row[8],
+                    'notice'    => (int)$row[8],
                 ));
             }
             
-            //$row_count++;
+            $row_count++;
         }
 
         /*foreach ($file as $row) {
+            if ($row === [null]) continue; 
             // 行番号を取得し、最初の行のみ除外
             if ($file->key() > 0){
-                var_dump($row);
+                $date = date('Y-m-d', strtotime($row[4]));
+                var_dump($date);
             }
         }*/
         //return view('users.test', ['row'=>$row]);
