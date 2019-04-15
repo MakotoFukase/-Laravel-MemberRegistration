@@ -81,7 +81,7 @@ class CsvController extends Controller
         $file->setFlags(SplFileObject::READ_CSV);
 
         // $registerde_id でDB内のidを取得
-        $registerde_id = DB::table('users')->get(['id']);//->toArray();
+        $registerde_id = DB::table('users')->orderBy('id', 'desc')->take(1)->get(['id']);//->toArray();
         //$registerde_id = (array) $registerde_id;
 
         $row_count = 1;
@@ -89,62 +89,38 @@ class CsvController extends Controller
         foreach ($file as $key => $row){
             // 最終行の処理(最終行が空っぽの場合の対策)
             if ($row === [null]) continue; 
+            
 
             if ($file->key() > 0){
+                if ($row[0] > (Array)$registerde_id) {
+                    $id = null;
+                }
                 // birthdayをdate型へ変換
                 if ($row[4] == null) {
-                    $date = null;
+                    $birthday = null;
                 }
                 else {
                     $date = date('Y-m-d', strtotime($row[4]));
                 }
-                User::updateOrCreate(
+
+                
+                //var_dump($id);
+                /*User::updateOrCreate(
                     ['id' => (int)$row[0]], // $registerde_id でDB内のidを取得する
                     [
-                        'id'        => 4,
+                        //'id'        => 0,
                         'name'      => $row[1], 
                         'email'     => $row[2], 
                         'password'  => $row[3], 
-                        'birthday'  => $date,
+                        'birthday'  => $birthday,
                         'age'       => (int)$row[5],
                         'reason'    => (int)$row[6],
                         'comment'   => $row[7],
                         'notice'    => (int)$row[8],
                     ]
-                );
+                );*/
             }
         }
-
-
-        //取得したオブジェクトを読み込み
-        /*$row_count = 1;
-        foreach ($file as $row)
-        {
-            // 最終行の処理(最終行が空っぽの場合の対策)
-            if ($row === [null]) continue; 
-
-            if ($file->key() > 0){
-                // birthdayをdate型へ変換
-                if ($row[4] == null) {
-                    $date = null;
-                }
-                else {
-                    $date = date('Y-m-d', strtotime($row[4]));
-                }
-                //1件ずつインポート
-                User::insert(array(
-                    'name' => $row[1], 
-                    'email' => $row[2], 
-                    'password' => $row[3], 
-                    'birthday' => $date,
-                    'age'       => (int)$row[5],
-                    'reason'    => (int)$row[6],
-                    'comment'   => $row[7],
-                    'notice'    => (int)$row[8],
-                ));
-            }            
-            $row_count++;
-        }*/
 
         /*foreach ($file as $key => $row) {
             if ($row === [null]) continue; 
@@ -154,28 +130,9 @@ class CsvController extends Controller
                 var_dump((object)$row);
             }
         }*/
-        //return view('users.test', ['row'=>$row]);
-        return redirect ('/list');
+        return view('users.test', ['id'=>$id]);
+        //return redirect ('/list');
     }
-
-
-
-
-
-
-    // 読み込めないエラー発生
-    /*public function import(Request $request)
-    {
-        $path = $request->file('file')->store('import');
-        $reader = Excel::load($path);
-
-        $rows = $reader->toArray();
-
-        foreach ($rows as $row){
-            $recode = $this->user->updateOrCreate(['id' => $row['id']]);
-        }
-        return redirect ('/list');
-    }*/
 
     // アップデートできないので却下
     /*public function import(Request $request)
