@@ -81,19 +81,21 @@ class CsvController extends Controller
         $file->setFlags(SplFileObject::READ_CSV);
 
         // $registerde_id でDB内のidを取得
-        $registerde_id = DB::table('users')->orderBy('id', 'desc')->take(1)->get(['id']);//->toArray();
-        //$registerde_id = (array) $registerde_id;
+        $registerde_id = DB::table('users')->orderBy('id', 'desc')->take(1)->get(['id'])->toArray();
 
         $row_count = 1;
         // オブジェクトのままforeach
-        foreach ($file as $key => $row){
+        /*foreach ($file as $key => $row){
             // 最終行の処理(最終行が空っぽの場合の対策)
             if ($row === [null]) continue; 
-            
+
 
             if ($file->key() > 0){
-                if ($row[0] > (Array)$registerde_id) {
+                if (5 > $registerde_id[0]) {
                     $id = null;
+                }
+                else {
+                    $id = 3;
                 }
                 // birthdayをdate型へ変換
                 if ($row[4] == null) {
@@ -104,7 +106,7 @@ class CsvController extends Controller
                 }
 
                 
-                //var_dump($id);
+                var_dump($id);
                 /*User::updateOrCreate(
                     ['id' => (int)$row[0]], // $registerde_id でDB内のidを取得する
                     [
@@ -118,9 +120,9 @@ class CsvController extends Controller
                         'comment'   => $row[7],
                         'notice'    => (int)$row[8],
                     ]
-                );*/
+                );
             }
-        }
+        }*/
 
         /*foreach ($file as $key => $row) {
             if ($row === [null]) continue; 
@@ -130,7 +132,7 @@ class CsvController extends Controller
                 var_dump((object)$row);
             }
         }*/
-        return view('users.test', ['id'=>$id]);
+        return view('users.test', ['registerde_id'=>(Array)$registerde_id]);
         //return redirect ('/list');
     }
 
