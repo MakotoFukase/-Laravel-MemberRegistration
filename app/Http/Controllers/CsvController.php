@@ -81,22 +81,25 @@ class CsvController extends Controller
         $file->setFlags(SplFileObject::READ_CSV);
 
         // $registerde_id でDB内のidを取得
-        $registerde_id = DB::table('users')->orderBy('id', 'desc')->take(1)->get(['id'])->toArray();
+        //$registerde_id = DB::table('users')->take(1)->get(['id']);//->orderBy('id', 'desc')->take(1);//->get(['id']);
+        $registerde_id = DB::table('users')->orderBy('id', 'desc')->first()->id;
+
+        //$registerde_id = $registerde_id->id;
 
         $row_count = 1;
         // オブジェクトのままforeach
-        /*foreach ($file as $key => $row){
+        foreach ($file as $key => $row){
             // 最終行の処理(最終行が空っぽの場合の対策)
             if ($row === [null]) continue; 
 
 
             if ($file->key() > 0){
-                if (5 > $registerde_id[0]) {
+                if ($row[0] > $registerde_id[0]) {
                     $id = null;
                 }
-                else {
+                /*else {
                     $id = 3;
-                }
+                }*/
                 // birthdayをdate型へ変換
                 if ($row[4] == null) {
                     $birthday = null;
@@ -120,9 +123,9 @@ class CsvController extends Controller
                         'comment'   => $row[7],
                         'notice'    => (int)$row[8],
                     ]
-                );
+                );*/
             }
-        }*/
+        }
 
         /*foreach ($file as $key => $row) {
             if ($row === [null]) continue; 
