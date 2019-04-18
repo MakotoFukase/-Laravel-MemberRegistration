@@ -83,10 +83,10 @@ class CsvController extends Controller
                 }                
                 // birthdayをdate型へ変換
                 if ($row[4] == null) {
-                    $birthday = null;
+                    $row[4] = null;
                 }
                 else {
-                    $date = date('Y-m-d', strtotime($row[4]));
+                    $row[4] = date('Y-m-d', strtotime($row[4]));
                 }
                 User::updateOrCreate(
                     ['id' => (int)$row[0]],
@@ -94,7 +94,7 @@ class CsvController extends Controller
                         'name'      => $row[1], 
                         'email'     => $row[2], 
                         'password'  => $row[3], 
-                        'birthday'  => $birthday,
+                        'birthday'  => $row[4],
                         'age'       => (int)$row[5],
                         'reason'    => (int)$row[6],
                         'comment'   => $row[7],
