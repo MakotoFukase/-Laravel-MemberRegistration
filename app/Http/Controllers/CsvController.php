@@ -66,20 +66,20 @@ class CsvController extends Controller
         $file = new SplFileObject($file_path, "r+b");
         $file->setFlags(SplFileObject::READ_CSV);
 
-        // $existing_id でDB内のidを取得
-        $existing_id = DB::table('users')->orderBy('id', 'desc')->first()->id;
-
-        $row_count = 1;
+        //$row_count = 1;
         foreach ($file as $key => $row){
+            // $existing_id でDB内のidを取得
+            $existing_id = DB::table('users')->orderBy('id', 'desc')->first()->id;
             // 最終行を判断
-            if ($row !== end($file)) {
-                continue;
-            }
+            if ($row === [null]) continue; 
             // ヘッダーを飛ばす
-            elseif ($file->key() > 0) {
+            if ($file->key() > 0 && $row !== end($file)) {
                 // DBに存在しないidをauto_incrementにするための処理
                 if ($row[0] > $existing_id) {
                     $row[0] = null;
+                }
+                elseif ($row === end($file)) {
+                    continue;
                 }                
                 // birthdayをdate型へ変換
                 if ($row[4] == null) {
