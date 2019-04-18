@@ -62,7 +62,9 @@ class CsvController extends Controller
         $file_path = storage_path("app/$file_name");
 
         // 読み込んだデータをUTF-8に変換して保存
-        file_put_contents($file_path, mb_convert_encoding(file_get_contents($file_path), 'UTF-8', 'sjis'));
+        file_put_contents($file_path, mb_convert_encoding(file_get_contents($file_path), 'UTF-8'));
+        // sjisは文字化けしないけど、UTF-8が文字化けになる
+        //file_put_contents($file_path, mb_convert_encoding(file_get_contents($file_path), 'UTF-8', 'sjis'));
         $file = new SplFileObject($file_path, "r+b");
         $file->setFlags(SplFileObject::READ_CSV);
 
@@ -78,9 +80,9 @@ class CsvController extends Controller
                 if ($row[0] > $existing_id) {
                     $row[0] = null;
                 }
-                elseif ($row === end($file)) {
+                /*elseif ($row === end($file)) {
                     continue;
-                }                
+                } */               
                 // birthdayをdate型へ変換
                 if ($row[4] == null) {
                     $row[4] = null;
