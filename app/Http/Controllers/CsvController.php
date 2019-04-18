@@ -62,7 +62,7 @@ class CsvController extends Controller
         $file_path = storage_path("app/$file_name");
 
         // 読み込んだデータをUTF-8に変換して保存
-        file_put_contents($file_path, mb_convert_encoding(file_get_contents($file_path), 'UTF-8'));
+        file_put_contents($file_path, mb_convert_encoding(file_get_contents($file_path), 'UTF-8', 'sjis'));
         $file = new SplFileObject($file_path, "r+b");
         $file->setFlags(SplFileObject::READ_CSV);
 
