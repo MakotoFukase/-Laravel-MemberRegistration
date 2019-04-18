@@ -94,12 +94,11 @@ class CsvController extends Controller
 
 
             if ($file->key() > 0){
-                if ($row[0] > $registerde_id[0]) {
-                    $id = null;
+                // CSVに入っているidがDBに入っているidより大きければ、無効にする
+                if ($row[0] > $registerde_id) {
+                    $row[0] = null;
                 }
-                /*else {
-                    $id = 3;
-                }*/
+                
                 // birthdayをdate型へ変換
                 if ($row[4] == null) {
                     $birthday = null;
@@ -108,9 +107,7 @@ class CsvController extends Controller
                     $date = date('Y-m-d', strtotime($row[4]));
                 }
 
-                
-                var_dump($id);
-                /*User::updateOrCreate(
+                User::updateOrCreate(
                     ['id' => (int)$row[0]], // $registerde_id でDB内のidを取得する
                     [
                         //'id'        => 0,
@@ -123,7 +120,7 @@ class CsvController extends Controller
                         'comment'   => $row[7],
                         'notice'    => (int)$row[8],
                     ]
-                );*/
+                );
             }
         }
 
@@ -135,8 +132,8 @@ class CsvController extends Controller
                 var_dump((object)$row);
             }
         }*/
-        return view('users.test', ['registerde_id'=>(Array)$registerde_id]);
-        //return redirect ('/list');
+        //return view('users.test', ['registerde_id'=>$registerde_id]);
+        return redirect ('/list');
     }
 
     // アップデートできないので却下
