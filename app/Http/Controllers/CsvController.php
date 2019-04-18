@@ -71,18 +71,16 @@ class CsvController extends Controller
 
         $row_count = 1;
         foreach ($file as $key => $row){
-            // 最終行
-            //if ($row === [null]) continue; 
-
-            if ($file->key() == null) {
+            // 最終行を判断
+            if ($row !== end($file)) {
                 continue;
             }
+            // ヘッダーを飛ばす
             elseif ($file->key() > 0) {
-                // CSVに入っているidがDBに入っているidより大きければ、無効にする
+                // DBに存在しないidをauto_incrementにするための処理
                 if ($row[0] > $existing_id) {
                     $row[0] = null;
-                }
-                
+                }                
                 // birthdayをdate型へ変換
                 if ($row[4] == null) {
                     $birthday = null;
@@ -90,7 +88,6 @@ class CsvController extends Controller
                 else {
                     $date = date('Y-m-d', strtotime($row[4]));
                 }
-
                 User::updateOrCreate(
                     ['id' => (int)$row[0]],
                     [
