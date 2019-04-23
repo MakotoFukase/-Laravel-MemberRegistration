@@ -40,9 +40,9 @@
         </tr>
     @endforeach
     </table><br>
-    <input type="button" onclick="location.href='list/input'" value="新規登録">
-    <input type="button" onclick="location.href='list/export'" value="CSVダウンロード">
-    <form method="post" action="list/import" enctype="multipart/form-data">
+    <input type="button" onclick="location.href='input'" value="新規登録">
+    <input type="button" onclick="location.href='export'" value="CSVダウンロード">
+    <form method="post" action="import" enctype="multipart/form-data">
         {{ csrf_field() }}
         <input type="file" name="file">
         <input type="submit" value="send">

@@ -14,7 +14,7 @@
         <p>登録画面</p>
     
         <table>
-        <form method="post" action="/list/input">
+        <form method="post" action="input">
             {{ csrf_field() }}
             <tr><th>氏名: </th><td><input type="text" name="name">
                 </td></tr>

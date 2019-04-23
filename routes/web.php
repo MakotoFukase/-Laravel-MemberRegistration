@@ -22,16 +22,16 @@ Route::post('hello', 'HelloController@post');
 
 
 // 会員登録サイト
-Route::get('list', 'UsersController@list');
-Route::get('list/input', 'UsersController@input');
-Route::post('list/input', 'UsersController@create');
-Route::get('list/input/complete', 'UsersController@complete');
+Route::get('', 'UsersController@index');
+Route::get('input', 'UsersController@input');
+Route::post('input', 'UsersController@create');
+Route::get('input/complete', 'UsersController@complete');
 
 // CSV出力
-Route::get('list/export', 'CsvController@export');
+Route::get('export', 'CsvController@export');
 // CSV入力
-Route::post('list/import', 'CsvController@import');   
+Route::post('import', 'CsvController@import');   
 
 
 // テスト
-Route::get('list/test', 'CsvController@test');
+Route::get('test', 'CsvController@test');

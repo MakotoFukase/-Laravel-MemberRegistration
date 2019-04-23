@@ -10,10 +10,10 @@ use App\User;
 class UsersController extends Controller
 {
     // トップ画面
-    public function list(Request $request) 
+    public function index(Request $request) 
     {
         $users = User::all();
-        return view('users.list', ['users'=>$users]);
+        return view('users.index', ['users'=>$users]);
     }
 
 
@@ -38,7 +38,7 @@ class UsersController extends Controller
             'notice'    => $request->notice,
         ];
         DB::table('users')->insert($param);
-        return redirect ('/list/input/complete');
+        return redirect ('/input/complete');
     }
 
 
