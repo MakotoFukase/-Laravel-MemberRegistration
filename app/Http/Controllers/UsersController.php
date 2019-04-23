@@ -50,4 +50,11 @@ class UsersController extends Controller
         ];
         return view('users.complete', $data);
     }
+
+
+    // DBのリレーション
+    public function reasons()
+    {
+        return $this->hasMany('App\Reasons');
+    }
 }
