@@ -12,20 +12,24 @@ class ReasonsTableSeeder extends Seeder
     public function run()
     {
         $param = [
-            'reason_id' => 0,
+            'reason_id' => 1,
             'reason'    => 'チラシを見た'
         ];
-        $param = [
-            'reason_id' => 1,
-            'reason'    => '電車広告を見た'
-        ];
+        DB::table('reasons')->insert($param);
         $param = [
             'reason_id' => 2,
-            'reason'    => 'SNSで見た'
+            'reason'    => '電車広告を見た'
         ];
+        DB::table('reasons')->insert($param);
         $param = [
             'reason_id' => 3,
+            'reason'    => 'SNSで見た'
+        ];
+        DB::table('reasons')->insert($param);
+        $param = [
+            'reason_id' => 4,
             'reason'    => 'お友達に聞いた'
         ];
+        DB::table('reasons')->insert($param);
     }
 }

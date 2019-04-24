@@ -12,12 +12,14 @@ class NoticesTableSeeder extends Seeder
     public function run()
     {
         $param = [
-            'notice_id' => 0,
+            'notice_id' => 1,
             'notice'    => '希望する'
         ];
+        DB::table('notices')->insert($param);
         $param = [
-            'notice_id' => 1,
+            'notice_id' => 2,
             'notice'    => '希望しない'
         ];
+        DB::table('notices')->insert($param);
     }
 }

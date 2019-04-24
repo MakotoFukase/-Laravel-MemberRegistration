@@ -18,9 +18,9 @@ class UsersTableSeeder extends Seeder
             'password' => 'test12345',
             'birthday' => '1990/02/14',
             'age' => 28,
-            'reason' => '0',
+            'reason_id' => '0',
             'comment' => 'こんにちは',
-            'notice' => '0',
+            'notice_id' => '0',
         ];
         DB::table('users')->insert($param);
 
@@ -30,9 +30,9 @@ class UsersTableSeeder extends Seeder
             'password' => 'test12345',
             'birthday' => '1995/10/10',
             'age' => 23,
-            'reason' => '1',
+            'reason_id' => '1',
             'comment' => 'こんばんは',
-            'notice' => '1',
+            'notice_id' => '1',
         ];
         DB::table('users')->insert($param);
 
