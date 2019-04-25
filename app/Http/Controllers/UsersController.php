@@ -39,12 +39,22 @@ class UsersController extends Controller
             'password'  => $request->password,
             'birthday'  => $request->birthday,
             'age'       => $request->age,
-            'reason_id'    => $request->reason_id,
+            'reason_id' => $request->reason_id,
             'comment'   => $request->comment,
-            'notice_id'    => $request->notice_id,
+            'notice_id' => $request->notice_id,
         ];
         DB::table('users')->insert($param);
-        return redirect ('/input/complete');
+        return redirect ('/input/conf');
+    }
+
+
+    // 確認画面
+    public function conf() 
+    {
+        $data = [
+            'msg'=>'登録確認画面',
+        ];
+        return view('users.conf', $data);
     }
 
 
