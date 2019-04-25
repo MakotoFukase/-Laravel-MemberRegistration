@@ -26,7 +26,7 @@ class CsvController extends Controller
        $users = \DB::table('users')
         ->leftJoin('reasons', 'users.reason_id', '=', 'reasons.reason_id')
         ->leftJoin('notices', 'users.notice_id', '=', 'notices.notice_id')
-        ->select('id', 'name', 'email', 'password', 'birthday', 'age', 'reason', 'comment', 'notice', 'created_at', 'updated_at')
+        ->select('id', 'name', 'email', 'password', 'birthday', 'age', 'reason', 'comment', 'notice')
         ->orderBy('users.id', 'asc')
         ->get()->toArray();
        
@@ -40,8 +40,6 @@ class CsvController extends Controller
            'reason', 
            'comment', 
            'notice',
-           'created_at',
-           'updated_at'
        ];
        array_unshift($users, $csvHeader);        
        $stream = fopen('php://temp', 'r+b');
@@ -106,14 +104,14 @@ class CsvController extends Controller
                         'password'  => $row[3], 
                         'birthday'  => $row[4],
                         'age'       => (int)$row[5],
-                        'reason'    => (int)$row[6],
+                        'reason_id'    => (int)$row[6],
                         'comment'   => $row[7],
-                        'notice'    => (int)$row[8],
+                        'notice_id'    => (int)$row[8],
                     ]
                 );
             }
         }
         //return view('users.test', ['existing_id'=>$existing_id]);
-        return redirect ('/list');
+        return redirect ('/');
     }
 }
