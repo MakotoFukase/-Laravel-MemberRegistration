@@ -34,9 +34,9 @@
             <td>{{$user->password}}</td>
             <td>{{$user->birthday}}</td>
             <td>{{$user->age}}</td>
-            <td>{{$user->reason}}</td>
+            <td>{{$user->reason_type}}</td>
             <td>{{$user->comment}}</td>
-            <td>{{$user->notice}}</td>
+            <td>{{$user->notice_type}}</td>
         </tr>
     @endforeach
     </table><br>

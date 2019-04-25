@@ -20,9 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('password', 255) ->nullable();
             $table->date('birthday')        ->nullable();
             $table->integer('age')          ->nullable();
-            $table->integer('reason_id')       ->nullable();
+            $table->integer('reason_id')    ->nullable();
             $table->string('comment', 255)  ->nullable();
-            $table->integer('notice_id')       ->nullable();
+            $table->integer('notice_id')    ->nullable();
             $table->timestamps();
         });
     }

@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
             'age' => 23,
             'reason_id' => 3,
             'comment' => 'こんばんは',
-            'notice_id' => 2,
+            'notice_id' => 0,
         ];
         DB::table('users')->insert($param);
 

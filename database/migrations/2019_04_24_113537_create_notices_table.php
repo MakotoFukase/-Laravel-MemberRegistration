@@ -14,8 +14,8 @@ class CreateNoticesTable extends Migration
     public function up()
     {
         Schema::create('notices', function (Blueprint $table) {
-            $table->increments('notice_id');
-            $table->string('notice', 255);
+            $table->integer('notice_id');
+            $table->string('notice_type', 255);
         });
     }
 

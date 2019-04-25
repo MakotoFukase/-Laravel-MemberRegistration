@@ -14,8 +14,8 @@ class CreateReasonsTable extends Migration
     public function up()
     {
         Schema::create('reasons', function (Blueprint $table) {
-            $table->increments('reason_id');
-            $table->string('reason', 255);
+            $table->integer('reason_id');
+            $table->string('reason_type', 255);
         });
     }
 
