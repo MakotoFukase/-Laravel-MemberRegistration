@@ -33,9 +33,9 @@ class UsersController extends Controller
             'password'  => $request->password,
             'birthday'  => $request->birthday,
             'age'       => $request->age,
-            'reason'    => $request->reason,
+            'reason_id'    => $request->reason_id,
             'comment'   => $request->comment,
-            'notice'    => $request->notice,
+            'notice_id'    => $request->notice_id,
         ];
         DB::table('users')->insert($param);
         return redirect ('/input/complete');

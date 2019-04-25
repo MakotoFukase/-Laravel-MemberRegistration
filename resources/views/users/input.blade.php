@@ -26,11 +26,11 @@
                 </td></tr>
             <tr><th>年齢: </th><td><input type="integer" name="age">
                 </td></tr>
-            <tr><th>サイトを知った理由: </th><td><input type="integer" name="reason">
+            <tr><th>サイトを知った理由: </th><td><input type="integer" name="reason_id">
                 </td></tr>
             <tr><th>コメント: </th><td><input type="text" name="comment">
                 </td></tr>
-            <tr><th>メルマガ希望: </th><td><input type="integer" name="notice">
+            <tr><th>メルマガ希望: </th><td><input type="integer" name="notice_id">
                 </td></tr>
             <tr><th></th><td><input type="submit" value="登録">
         </form>
