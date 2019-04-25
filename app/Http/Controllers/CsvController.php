@@ -21,7 +21,15 @@ class CsvController extends Controller
    public function export()
    {
        $now = date("YmdHis");
-       $users = DB::table('users')->get()->toArray();
+       //$users = DB::table('users')->get()->toArray();
+       
+       $users = \DB::table('users')
+        ->leftJoin('reasons', 'users.reason_id', '=', 'reasons.reason_id')
+        ->leftJoin('notices', 'users.notice_id', '=', 'notices.notice_id')
+        ->select('id', 'name', 'email', 'password', 'birthday', 'age', 'reason', 'comment', 'notice', 'created_at', 'updated_at')
+        ->orderBy('users.id', 'asc')
+        ->get()->toArray();
+       
        $csvHeader = [
            'id', 
            'name', 

@@ -17,6 +17,7 @@ class UsersController extends Controller
         $users = \DB::table('users')
         ->leftJoin('reasons', 'users.reason_id', '=', 'reasons.reason_id')
         ->leftJoin('notices', 'users.notice_id', '=', 'notices.notice_id')
+        ->orderBy('users.id', 'asc')
         ->get();
         return view('users.index', ['users'=>$users]);
     }
