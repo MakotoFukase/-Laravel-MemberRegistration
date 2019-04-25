@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use App\Notice;
 
 /* 最初からあったよくわからないやつ
 class User extends Authenticatable
@@ -40,8 +41,13 @@ class User extends Model
         'password',
         'birthday',
         'age',
-        'reason',
+        'reason_id',
         'comment',
-        'notice'
+        'notice_id'
     ];
+
+    public function notice()
+    {
+        return $this->belongsTo('App\Notice');
+    }
 }

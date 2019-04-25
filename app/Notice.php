@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Notices extends Model
+class Notice extends Model
 {
     protected $fillable = [
         'notice_id',

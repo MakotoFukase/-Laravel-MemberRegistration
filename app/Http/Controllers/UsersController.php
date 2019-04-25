@@ -12,7 +12,12 @@ class UsersController extends Controller
     // トップ画面
     public function index(Request $request) 
     {
-        $users = User::all();
+        // 外部結合
+        // 【TODO】EloquentのRelationshipにできないか
+        $users = \DB::table('users')
+        ->leftJoin('reasons', 'users.reason_id', '=', 'reasons.reason_id')
+        ->leftJoin('notices', 'users.notice_id', '=', 'notices.notice_id')
+        ->get();
         return view('users.index', ['users'=>$users]);
     }
 
