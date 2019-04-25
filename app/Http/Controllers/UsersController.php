@@ -54,7 +54,7 @@ class UsersController extends Controller
         $data = [
             'msg'=>'登録確認画面',
         ];
-        return view('users.conf', $data);
+        return view('users.conf');
     }
 
 

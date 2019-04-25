@@ -56,7 +56,7 @@
                 </td>
             </tr>               
         </table>
-        <input type="submit" value="登録">
+        <input type="submit" value="確認画面へ">
     </form>
     <button type="button" onclick="history.back()">戻る</button>       
 </body>

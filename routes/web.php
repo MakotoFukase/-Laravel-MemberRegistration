@@ -25,7 +25,7 @@ Route::post('hello', 'HelloController@post');
 Route::get('', 'UsersController@index');
 Route::get('input', 'UsersController@input');
 Route::post('input', 'UsersController@create');
-Route::post('input/conf', 'UsersController@conf');
+Route::get('input/conf', 'UsersController@conf');
 Route::get('input/conf/complete', 'UsersController@complete');
 
 // CSV出力

@@ -10,6 +10,6 @@
 <body>
         <h1>complete</h1>
         <p>登録が完了しました。</p>
-        <input type="button" onclick="location.href='/'" value="戻る">
+        <input type="button" onclick="location.href='/'" value="トップへ戻る">
 </body>
 </html>
