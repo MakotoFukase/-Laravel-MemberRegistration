@@ -14,26 +14,33 @@
         <p>登録画面</p>
     
         <table>
-        <form method="post" action="input">
-            {{ csrf_field() }}
-            <tr><th>氏名: </th><td><input type="text" name="name">
-                </td></tr>
-            <tr><th>メールアドレス: </th><td><input type="text" name="email">
-                </td></tr>
-            <tr><th>パスワード: </th><td><input type="text" name="password">
-                </td></tr>
-            <tr><th>生年月日: </th><td><input type="date" name="birthday">
-                </td></tr>
-            <tr><th>年齢: </th><td><input type="integer" name="age">
-                </td></tr>
-            <tr><th>サイトを知った理由: </th><td><input type="integer" name="reason_id">
-                </td></tr>
-            <tr><th>コメント: </th><td><input type="text" name="comment">
-                </td></tr>
-            <tr><th>メルマガ希望: </th><td><input type="integer" name="notice_id">
-                </td></tr>
-            <tr><th></th><td><input type="submit" value="登録">
-        </form>
+            <form method="post" action="input">
+                {{ csrf_field() }}
+                <tr><th align="left">氏名 </th><td><input type="text" name="name">
+                    </td></tr>
+                <tr><th align="left">メールアドレス </th><td><input type="text" name="email">
+                    </td></tr>
+                <tr><th align="left">パスワード </th><td><input type="text" name="password">
+                    </td></tr>
+                <tr><th align="left">生年月日 </th><td><input type="date" name="birthday">
+                    </td></tr>
+                <tr><th align="left">年齢 </th><td><input type="integer" name="age">
+                    </td></tr>
+                <tr><th align="left">サイトを知った理由 </th><td>
+                    <input type="radio" name="reason_id" value=0>チラシを見た<br>
+                    <input type="radio" name="reason_id" value=1>電車広告を見た<br>
+                    <input type="radio" name="reason_id" value=2>SNSで見た<br>
+                    <input type="radio" name="reason_id" value=3>お友達に聞いた<br>
+                    </td></tr>
+                <tr><th align="left">コメント </th><td><input type="text" name="comment">
+                    </td></tr>
+                <tr><th align="left">メルマガ希望 </th><td>
+                    <input type="radio" name="notice_id" value=0>希望する<br>
+                    <input type="radio" name="notice_id" value=1>希望しない<br>
+                    </td></tr>        
+            </form>
         </table>
+        <button type="button" onclick="history.back()">戻る</button>
+        <input type="submit" value="登録">
 </body>
 </html>
