@@ -80,8 +80,8 @@ class UsersController extends Controller
     {
         //$name = $request->session()->get('name');
         $name = session('name');
-        $email = $request->session()->get('email');
-        $comment = $request->session()->get('comment');
+        $email = session('email');
+        $comment = session('comment');
         return view('users.input',
             ['name' => $name,],
             ['email' => $email],
@@ -99,8 +99,6 @@ class UsersController extends Controller
             ['email' => $email],
             ['comment' => $comment]
         );
-        //session(['email' => $email]);
-        //session(['comment' => $comment]);
         return redirect('/input');
     }
 }
