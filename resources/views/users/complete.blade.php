@@ -1,5 +1,6 @@
 <html>
 <head>
+    <link rel="shortcut icon" href="../../../images/favicon.ico"/>
     <title>会員登録サイト</title>
     <style>
     body { font-size:16pt; color:#999; }
