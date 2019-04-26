@@ -39,10 +39,10 @@
             <tr>
                 <th align="left">サイトを知った理由 </th>
                 <td>
-                    <input type="radio" name="reason_id" value=0>チラシを見た<br>
-                    <input type="radio" name="reason_id" value=1>電車広告を見た<br>
-                    <input type="radio" name="reason_id" value=2>SNSで見た<br>
-                    <input type="radio" name="reason_id" value=3>お友達に聞いた<br>
+                    <label><input type="radio" name="reason_id" value=0>チラシを見た<br>
+                    <label><input type="radio" name="reason_id" value=1>電車広告を見た<br>
+                    <label><input type="radio" name="reason_id" value=2>SNSで見た<br>
+                    <label><input type="radio" name="reason_id" value=3>お友達に聞いた<br>
                 </td>
             </tr>
             <tr>
@@ -52,8 +52,8 @@
             <tr>
                 <th align="left">メルマガ希望 </th>
                 <td>
-                    <input type="radio" name="notice_id" value=0>希望する<br>
-                    <input type="radio" name="notice_id" value=1>希望しない<br>
+                    <label><input type="radio" name="notice_id" value=0>希望する<br>
+                    <label><input type="radio" name="notice_id" value=1>希望しない<br>
                 </td>
             </tr>               
         </table>

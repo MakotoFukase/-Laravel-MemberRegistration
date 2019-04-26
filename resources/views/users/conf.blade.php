@@ -26,34 +26,40 @@
         </tr>
         <tr>
             <th align="left">パスワード </th>
-            <td><input type="text" name="password"></td>
+            <td>{{$password}}</td>
         </tr>
         <tr>
             <th align="left">生年月日 </th>
-            <td><input type="date" name="birthday"></td>
+            <td><input type="date" name="birthday" value="{{$birthday}}" disabled="disabled"></td>
         </tr>
         <tr>
             <th align="left">年齢 </th>
-            <td><input type="integer" name="age"></td>
+            <td>{{$age}}</td>
         </tr>
         <tr>
             <th align="left">サイトを知った理由 </th>
             <td>
-                <input type="radio" name="reason_id" value=0>チラシを見た<br>
-                <input type="radio" name="reason_id" value=1>電車広告を見た<br>
-                <input type="radio" name="reason_id" value=2>SNSで見た<br>
-                <input type="radio" name="reason_id" value=3>お友達に聞いた<br>
+                <input type="radio" name="reason_id" disabled="disabled"
+                    <?php if($reason_id == 0){echo 'checked="checked"';}?>>チラシを見た<br>
+                <input type="radio" name="reason_id" disabled="disabled"
+                    <?php if($reason_id == 1){echo 'checked="checked"';}?>>電車広告を見た<br>
+                <input type="radio" name="reason_id" disabled="disabled"
+                    <?php if($reason_id == 2){echo 'checked="checked"';}?>>SNSで見た<br>
+                <input type="radio" name="reason_id" disabled="disabled"
+                    <?php if($reason_id == 3){echo 'checked="checked"';}?>>お友達に聞いた<br>
             </td>
         </tr>
         <tr>
             <th align="left">コメント </th>
-            <td><input type="text" name="comment" ></td>
+            <td>{{$comment}}</td>
         </tr>
         <tr>
             <th align="left">メルマガ希望 </th>
             <td>
-                <input type="radio" name="notice_id" value=0>希望する<br>
-                <input type="radio" name="notice_id" value=1>希望しない<br>
+                <input type="radio" name="notice_id" disabled="disabled"
+                    <?php if($notice_id == 0){echo 'checked="checked"';}?>>希望する<br>
+                <input type="radio" name="notice_id" disabled="disabled"
+                    <?php if($notice_id == 1){echo 'checked="checked"';}?>>希望しない<br>
             </td>
         </tr>               
     </table>

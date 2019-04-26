@@ -27,31 +27,45 @@ class UsersController extends Controller
     // 登録画面
     public function input(Request $request) 
     {
-        $name = Session::get('name', '');
-        $email = Session::get('email', '');
+        // セッションに値が存在した場合、その値を統合画面へ表示
+        $name       = Session::get('name', '');
+        $email      = Session::get('email', '');
+        $password   = Session::get('password', '');
+        $birthday   = Session::get('birthday', '');
+        $age        = Session::get('age', '');
+        $reason_id  = Session::get('reason_id', '');
+        $comment    = Session::get('comment', '');
+        $notice_id  = Session::get('notice_id', '');
         return view('users.input',
             ['name' => $name],
-            ['email' => $email]
+            ['email' => $email],
+            ['password' => $password],
+            ['birthday' => $birthday],
+            ['age' => $age],
+            ['reason_id' => $reason_id],
+            ['comment' => $comment],
+            ['notice_id' => $notice_id]
         );
-        //return redirect('/input');
     }
 
 
     // DBへ登録
-    public function create(Request $request)
+    public function complete(Request $request)
     {
         $param = [
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'password'  => $request->password,
-            'birthday'  => $request->birthday,
-            'age'       => $request->age,
-            'reason_id' => $request->reason_id,
-            'comment'   => $request->comment,
-            'notice_id' => $request->notice_id,
+            //'name'      => $request->name,
+            //'email'     => $request->email,
+            'name'      => Session::get('name'),
+            'email'     => Session::get('email'),
+            'password'  => Session::get('password'),
+            'birthday'  => Session::get('birthday'),
+            'age'       => Session::get('age'),
+            'reason_id' => Session::get('reason_id'),
+            'comment'   => Session::get('comment'),
+            'notice_id' => Session::get('notice_id'),
         ];
         DB::table('users')->insert($param);
-        return redirect ('/input/conf');
+        return view ('users.complete');
     }
 
 
@@ -66,13 +80,13 @@ class UsersController extends Controller
 
 
     // 完了画面
-    public function complete() 
+    /*public function complete() 
     {
         $data = [
             'msg'=>'登録確認画面',
         ];
         return view('users.complete', $data);
-    }
+    }*/
 
 
     // DBのリレーション
@@ -81,40 +95,43 @@ class UsersController extends Controller
         return $this->hasMany('App\Reasons');
     }*/
 
-    // セッション利用
-    /*public function ses_get(Request $request)
-    {
-        //$name = $request->session()->get('name');
-        $name = session('name');
-        $email = session('email');
-        $comment = session('comment');
-        return view('users.input',
-            ['name' => $name,],
-            ['email' => $email],
-            ['comment' => $comment]
-        );
-    }*/
     public function ses_put(Request $request)
     {
         $name = $request->name;
         $email = $request->email;
+        $password = $request->password;
+        $birthday = $request->birthday;
+        $age = $request->age;
+        $reason_id = $request->reason_id;
+        $comment = $request->comment;
+        $notice_id = $request->notice_id;
         //$comment = $request->comment;
         $request->session()->put('name', $name);
         $request->session()->put('email', $email);
+        $request->session()->put('password', $password);
+        $request->session()->put('birthday', $birthday);
+        $request->session()->put('age', $age);
+        $request->session()->put('reason_id', $reason_id);
+        $request->session()->put('comment', $comment);
+        $request->session()->put('notice_id', $notice_id);
+        
         /*session()->put(
             ['name' => $name],
             ['email' => $email],
             ['comment' => $comment]
         );*/
-        //return view('users.conf');
-        //return redirect('/input/conf');
-        /*return view('users.conf',
-        ['name' => $name,],
-        ['email' => $email]*/
-        //['comment' => $comment]
-        //);
-        //return view('users.conf', compact('name', 'email'));
-        return view('users.conf')->with(compact('name', 'email'));
+
+        return view('users.conf')
+            ->with(compact(
+                'name',
+                'email',
+                'password',
+                'birthday',
+                'age',
+                'reason_id',
+                'comment',
+                'notice_id'
+            ));
 
     }
 }
