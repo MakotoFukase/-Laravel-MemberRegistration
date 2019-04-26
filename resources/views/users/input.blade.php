@@ -1,5 +1,6 @@
 <html>
 <head>
+    <link rel="shortcut icon" href="../../../images/favicon.ico"/>
     <title>会員登録サイト</title>
     <style>
     body { font-size:16pt; color:#999; }
@@ -7,12 +8,12 @@
         margin:-50px 0px -100px 0px; }
     th {background-color:#999; color:fff; padding:5px 10px; }
     td {border: solid 1px #aaa; color:#999; padding:5px 10px; }
-        </style>
+    </style>
 </head>
 <body>
     <h1>Input</h1>
     <p>登録画面</p>        
-    <form method="post" action="input">
+    <form method="post" action="/input">
         <table>
             {{ csrf_field() }}
             <tr>
