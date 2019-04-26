@@ -27,7 +27,13 @@ class UsersController extends Controller
     // 登録画面
     public function input(Request $request) 
     {
-        return view('users.input');
+        $name = Session::get('name', '');
+        $email = Session::get('email', '');
+        return view('users.input',
+            ['name' => $name],
+            ['email' => $email]
+        );
+        //return redirect('/input');
     }
 
 
@@ -76,7 +82,7 @@ class UsersController extends Controller
     }*/
 
     // セッション利用
-    public function ses_get(Request $request)
+    /*public function ses_get(Request $request)
     {
         //$name = $request->session()->get('name');
         $name = session('name');
@@ -87,18 +93,28 @@ class UsersController extends Controller
             ['email' => $email],
             ['comment' => $comment]
         );
-    }
+    }*/
     public function ses_put(Request $request)
     {
         $name = $request->name;
         $email = $request->email;
-        $comment = $request->comment;
-        //$request->session()->put('name', $name);
-        session()->put(
+        //$comment = $request->comment;
+        $request->session()->put('name', $name);
+        $request->session()->put('email', $email);
+        /*session()->put(
             ['name' => $name],
             ['email' => $email],
             ['comment' => $comment]
-        );
-        return redirect('/input');
+        );*/
+        //return view('users.conf');
+        //return redirect('/input/conf');
+        /*return view('users.conf',
+        ['name' => $name,],
+        ['email' => $email]*/
+        //['comment' => $comment]
+        //);
+        //return view('users.conf', compact('name', 'email'));
+        return view('users.conf')->with(compact('name', 'email'));
+
     }
 }

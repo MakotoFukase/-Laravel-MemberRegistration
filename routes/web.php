@@ -25,11 +25,11 @@ Route::get('/', function () {
 Route::get('', 'UsersController@index');
 Route::get('input', 'UsersController@input');
 //Route::post('input', 'UsersController@create');
-Route::get('input', 'UsersController@ses_get');
-Route::post('input', 'UsersController@ses_put');
+//Route::post('input', 'UsersController@ses_get');
+Route::post('input/conf', 'UsersController@ses_put');
 
 
-Route::get('input/conf', 'UsersController@conf');
+//Route::get('input/conf', 'UsersController@conf');
 Route::get('input/conf/complete', 'UsersController@complete');
 
 // CSV出力・入力

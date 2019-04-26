@@ -13,7 +13,7 @@
 <body>
     <h1>Input</h1>
     <p>登録画面</p>        
-    <form method="post" action="/input">
+    <form method="post" action="/input/conf">
         <table>
             {{ csrf_field() }}
             <tr>
