@@ -17,11 +17,11 @@
             {{ csrf_field() }}
             <tr>
                 <th align="left">氏名 </th>
-                <td><input type="text" name="name"></td>
+                <td><input type="text" name="name" value="{{$name}}"></td>
             </tr>
             <tr>
                 <th align="left">メールアドレス </th>
-                <td><input type="text" name="email"></td>
+                <td><input type="text" name="email" value="{{$email}}"></td>
             </tr>
             <tr>
                 <th align="left">パスワード </th>
@@ -46,7 +46,7 @@
             </tr>
             <tr>
                 <th align="left">コメント </th>
-                <td><input type="text" name="comment"></td>
+                <td><input type="text" name="comment" ></td>
             </tr>
             <tr>
                 <th align="left">メルマガ希望 </th>

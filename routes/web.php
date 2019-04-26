@@ -17,20 +17,23 @@ Route::get('/', function () {
 
 
 // 参考書
-Route::get('hello', 'HelloController@index');
-Route::post('hello', 'HelloController@post');
+// Route::get('hello', 'HelloController@index');
+// Route::post('hello', 'HelloController@post');
 
 
 // 会員登録サイト
 Route::get('', 'UsersController@index');
 Route::get('input', 'UsersController@input');
-Route::post('input', 'UsersController@create');
+//Route::post('input', 'UsersController@create');
+Route::get('input', 'UsersController@ses_get');
+Route::post('input', 'UsersController@ses_put');
+
+
 Route::get('input/conf', 'UsersController@conf');
 Route::get('input/conf/complete', 'UsersController@complete');
 
-// CSV出力
+// CSV出力・入力
 Route::get('export', 'CsvController@export');
-// CSV入力
 Route::post('import', 'CsvController@import');   
 
 

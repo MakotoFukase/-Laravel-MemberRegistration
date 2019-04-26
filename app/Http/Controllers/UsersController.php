@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\User;
+use Session;
 
 class UsersController extends Controller
 {
@@ -69,8 +70,37 @@ class UsersController extends Controller
 
 
     // DBのリレーション
-    public function reasons()
+    /*public function reasons()
     {
         return $this->hasMany('App\Reasons');
+    }*/
+
+    // セッション利用
+    public function ses_get(Request $request)
+    {
+        //$name = $request->session()->get('name');
+        $name = session('name');
+        $email = $request->session()->get('email');
+        $comment = $request->session()->get('comment');
+        return view('users.input',
+            ['name' => $name,],
+            ['email' => $email],
+            ['comment' => $comment]
+        );
+    }
+    public function ses_put(Request $request)
+    {
+        $name = $request->name;
+        $email = $request->email;
+        $comment = $request->comment;
+        //$request->session()->put('name', $name);
+        session()->put(
+            ['name' => $name],
+            ['email' => $email],
+            ['comment' => $comment]
+        );
+        //session(['email' => $email]);
+        //session(['comment' => $comment]);
+        return redirect('/input');
     }
 }
