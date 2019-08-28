@@ -27,7 +27,7 @@ class UsersController extends Controller
     // 登録画面
     public function input(Request $request) 
     {
-        // セッションに値が存在した場合、その値を統合画面へ表示
+        // セッションに値が存在した場合、その値を登録画面へ表示
         $name       = Session::get('name', '');
         $email      = Session::get('email', '');
         $password   = Session::get('password', '');
@@ -51,6 +51,7 @@ class UsersController extends Controller
 
     public function ses_put(Request $request)
     {
+        // セッションに値を置いている
         $name = $request->name;
         $email = $request->email;
         $password = $request->password;
@@ -75,6 +76,7 @@ class UsersController extends Controller
             ['comment' => $comment]
         );*/
         return view('users.conf')
+            // 複数の変数を、確認画面へ送信
             ->with(compact(
                 'name',
                 'email',
@@ -112,6 +114,7 @@ class UsersController extends Controller
             'notice_id' => Session::get('notice_id'),
         ];
         DB::table('users')->insert($param);
+        // セッションから全データ削除
         Session::flush();
         return view ('users.complete');
     }

@@ -17,6 +17,8 @@
         <table>
             {{ csrf_field() }}
             <tr>
+                <!-- Valueを書くと、リロードしても値が残る -->
+                <!-- email以降もValue書くと、エラーが表示される -->
                 <th align="left">氏名 </th>
                 <td><input type="text" name="name" value="{{$name}}"></td>
             </tr>
@@ -47,7 +49,7 @@
             </tr>
             <tr>
                 <th align="left">コメント </th>
-                <td><input type="text" name="comment" ></td>
+                <td><input type="text" name="comment"></td>
             </tr>
             <tr>
                 <th align="left">メルマガ希望 </th>

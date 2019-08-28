@@ -24,6 +24,7 @@ class CsvController extends Controller
        //$users = DB::table('users')->get()->toArray();
        
        $users = \DB::table('users')
+       // テーブル結合
         ->leftJoin('reasons', 'users.reason_id', '=', 'reasons.reason_id')
         ->leftJoin('notices', 'users.notice_id', '=', 'notices.notice_id')
         ->select('id', 'name', 'email', 'password', 'birthday', 'age', 'reason_type', 'comment', 'notice_type')

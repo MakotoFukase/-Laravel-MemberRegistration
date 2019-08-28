@@ -27,6 +27,7 @@
         <th>メルマガ希望</th>
     </tr>
 
+    <!-- 繰り返し -->
     @foreach ($users as $user)
         <tr>
             <td>{{$user->id}}</td>
